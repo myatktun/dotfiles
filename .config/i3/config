@@ -2,7 +2,7 @@
 exec_always --no-startup-id xrandr --output eDP-1 --off --output HDMI-1 --primary --mode 1920x1080 --refresh 120.40 --pos 0x0 --rotate normal
 
 # load wallpaper
-exec_always --no-startup-id feh --bg-fill /home/stew/Pictures/2.png
+exec_always --no-startup-id feh --bg-fill /home/stew/Pictures/3.png
 
 # set mod
 set $mod Mod4
@@ -146,13 +146,13 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # set window style border and name
-for_window [class=".*"] border pixel 3
+for_window [class=".*"] border pixel 2
 
-set $bgcolor        #1d2021
-set $border         #81a1c1
-set $text           #eceff4
-set $urgent         #bf616a
-set $unfocus        #2e3440
+set $bgcolor        #282828
+set $border         #b8bb26
+set $text           #ebdbb2
+set $urgent         #cc241d
+set $unfocus        #d79921
 
 # gaps and borders colors
 # Property Name          Border   BG       Text     Indicator 
@@ -174,13 +174,13 @@ bar {
         status_command ~/.config/i3/bumblebee-status/bumblebee-status \
           -m cpu memory network_traffic nic date time battery  \
           -p memory.format="{used}/{total}" date.format="%a,%b %d" time.format="%I:%M%p" battery.decorate=false nic.format="" nic.states="^down"   \
-          -t nord-powerline 
+          -t gruvbox-powerline 
         colors {
-            background #2e3440
-            statusline #4c566a
+            background #32302f
+            statusline #3c3836
             #                  border     background   text
-            focused_workspace  #2e3440    #2e3440      #8fbbba
-            inactive_workspace #2e3440    #2e3440      #4c566a
+            focused_workspace  #b8bb26    #32302f      #fbfc17
+            inactive_workspace #d79921    #32302f      #fabd2f
             urgent_workspace   $urgent    $urgent      $text
           }
 }
