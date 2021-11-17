@@ -148,11 +148,11 @@ bindsym $mod+r mode "resize"
 # set window style border and name
 for_window [class=".*"] border pixel 2
 
-set $bgcolor        #282828
+set $bgcolor        #1d2021
 set $border         #8ec07c
 set $text           #ebdbb2
 set $urgent         #cc241d
-set $unfocus        #282828
+set $unfocus        #d65d0e
 
 # gaps and borders colors
 # Property Name          Border   BG       Text     Indicator 
@@ -164,8 +164,8 @@ client.urgent            $urgent  $urgent  $text    $urgent
 client.background        $unfocus
 
 # gaps and borders
-gaps inner 9
-gaps outer 5
+gaps inner 4
+gaps outer 7
 
 #bar
 bar {
@@ -174,13 +174,13 @@ bar {
         status_command ~/.config/i3/bumblebee-status/bumblebee-status \
           -m cpu memory network_traffic nic date time battery  \
           -p memory.format="{used}/{total}" date.format="%a,%b %d" time.format="%I:%M%p" battery.decorate=false nic.format="" nic.states="^down"   \
-          -t gruvbox-powerline 
+          -t iceberg-rainbow
         colors {
-            background #32302f
+            background #1d2021
             statusline #3c3836
             #                  border     background   text
-            focused_workspace  #689d6a    #32302f      #689d6a
-            inactive_workspace #d79921    #32302f      #fabd2f
+            focused_workspace  #689d6a    #1d2021      #689d6a
+            inactive_workspace #d79921    #1d2021      #fabd2f
             urgent_workspace   $urgent    $urgent      $text
           }
 }
