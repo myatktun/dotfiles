@@ -1,5 +1,4 @@
-# Nord Color Theme
-Current using theme
+# Gruvbox Color Theme
 
 ## Contents
 - os: Fedora 35
