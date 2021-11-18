@@ -5,6 +5,8 @@
     "environment": { "fg": "white", "bg": "darkestgreen", "attrs": [] },
     "mode": { "fg": "darkestgreen", "bg": "brightgreen", "attrs": ["bold"] },
     "attached_clients": { "fg": "white", "bg": "darkestgreen", "attrs": [] },
+    "branch_dirty": { "fg": "brightred", "bg": "gray2", "attrs": [] },
+    "branch_clean": { "fg": "brightgreen", "bg": "gray2", "attrs": [] },
     "continuation": { "fg": "darkcyan", "bg": "gray2", "attrs": ["bold"] },
     "cwd:current_folder": {
       "fg": "skyblue1",
