@@ -83,6 +83,7 @@ nnoremap <leader>html :-1read $HOME/.config/nvim/.skeleton.html<CR>4jwf>a
 nnoremap <F12> :!xdg-open %<CR>
 
 "Open terminal in current directory
+map <leader><C-t> :cd %:p:h<CR>:sp +te<CR>
 map <C-t> :cd %:p:h<CR>:vs +te<CR>
 
 "Exit insert mode when in terminal mode,insert mode
