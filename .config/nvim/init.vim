@@ -84,6 +84,7 @@ nnoremap <F12> :!xdg-open %<CR>
 
 "Open terminal in current directory
 map <C-t> :cd %:p:h<CR>:vs +te<CR>
+map <leader><C-t> :cd %:p:h<CR>:sp +te<CR>
 
 "Exit insert mode when in terminal mode,insert mode
 tnoremap <Esc> <C-\><C-n>
