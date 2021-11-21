@@ -166,21 +166,4 @@ client.background        $unfocus
 # gaps and borders
 gaps inner 4
 gaps outer 7
-
-#bar
-bar {
-        font pango:DejaVu Sans Mono,Font Awesome 6 Free Regular 11 
-        position top
-        status_command ~/.config/i3/bumblebee-status/bumblebee-status \
-          -m cpu memory network_traffic nic date time battery  \
-          -p memory.format="{used}/{total}" date.format="%a,%b %d" time.format="%I:%M%p" battery.decorate=false nic.format="" nic.states="^down"   \
-          -t iceberg-rainbow
-        colors {
-            background #1d2021
-            statusline #3c3836
-            #                  border     background   text
-            focused_workspace  #689d6a    #1d2021      #689d6a
-            inactive_workspace #d79921    #1d2021      #fabd2f
-            urgent_workspace   $urgent    $urgent      $text
-          }
-}
+exec_always --no-startup-id ~/.config/polybar/launch.sh
