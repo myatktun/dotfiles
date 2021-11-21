@@ -166,4 +166,19 @@ client.background        $unfocus
 # gaps and borders
 gaps inner 4
 gaps outer 7
-exec_always --no-startup-id ~/.config/polybar/launch.sh
+
+bar {
+    font pango:DejaVu Sans Mono, Font Awesome 6 Free Regular 11
+    position top
+    separator_symbol "  "
+    status_command i3status --config ~/.config/i3status/i3status.conf
+colors {
+            background #1d2021
+            statusline #ebdbb2
+            separator  #fabd2f
+            #                  border     background   text
+            focused_workspace  #458588    #1d2021      #458588
+            inactive_workspace #d79921    #1d2021      #fabd2f
+            urgent_workspace   $urgent    $urgent      $text
+          }
+}
