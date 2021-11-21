@@ -3,6 +3,21 @@
     "branch": {
       "before": " "
     },
+    "gitstatus": {
+      "args": {
+        "formats": {
+          "branch": "\ue0a0 {}",
+          "tag": " ★ {}",
+          "behind": " ↓ {}",
+          "ahead": " ↑ {}",
+          "staged": " ● {}",
+          "unmerged": " ✖ {}",
+          "changed": " ✚ {}",
+          "untracked": " … {}",
+          "stashed": " ⚑ {}"
+        }
+      }
+    },
     "hostname": {
       "args": {
         "only_if_ssh": true
