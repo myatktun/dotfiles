@@ -27,26 +27,35 @@ export PATH
 # Light Gray  0;37     White         1;37
 
 # enabling powerline
-if [ -f `which powerline-daemon` ]; then
-  powerline-daemon -q
-  POWERLINE_BASH_CONTINUATION=1
-  POWERLINE_BASH_SELECT=1
-  . /usr/share/powerline/bash/powerline.sh
-fi
+powerline-daemon -q
+POWERLINE_BASH_CONTINUATION=1
+POWERLINE_BASH_SELECT=1
+. /usr/local/lib/python3.10/site-packages/powerline/bindings/bash/powerline.sh
 
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
+# pyenv path
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 # eval "$(pyenv virtualenv-init -)"
+
+# to display git status
 source ~/.git-prompt.sh
 export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
+export GIT_PS1_SHOWUPSTREAM="verbose"
+export GIT_PS1_SHOWCOLORHINTS=true
 
-# export PS1="\[\e[1;32m\][\[\e[m\]\[\e[1;31m\]\u\[\e[m\]\[\e[1;33m\]@\[\e[m\]\[\e[1;32m\]\h\[\e[m\]:\[\e[1;36m\]\W\[\e[m\]\[\e[1;31m\]\$(__git_ps1)\[\e[m\]\[\e[1;32m\]]\[\e[m\]\[\e[1;34m\]\$\[\e[m\] "
-# export PS1=" \[\e[1;31m\]\u\[\e[m\]\[\e[1;34m\]@\[\e[m\]\[\e[1;32m\]\h:\[\e[m\]\[\e[1;36m\]\W\[\e[m\]\[\e[1;31m\]\$(__git_ps1)\[\e[m\]\[\e[1;34m\]\$\[\e[m\] "
+function mkcd
+{
+  command mkdir $1 && cd $1
+}
+
+# PROMPT_DIRTRIM=2
+# export PS1="\[\e[1;31m\]\u\[\e[m\]\[\e[1;34m\]@\[\e[m\]\[\e[1;32m\]\h:\[\e[m\]\[\e[1;36m\]\W\[\e[m\]\[\e[1;31m\]\$(__git_ps1)\[\e[m\]\[\e[1;34m\]\$\[\e[m\] "
+# PROMPT_COMMAND='__git_ps1 "\[\e[1;31m\]\u\[\e[m\]\[\e[1;34m\]@\[\e[m\]\[\e[1;32m\]\h:\[\e[m\]\[\e[1;36m\]\W\[\e[m\]" "\[\e[1;34m\]\$\[\e[m\] "'
 # export PS1='\[\033[32m\]\u \[\033[36m\]@ \h \w\[\033[32m\]$(__git_ps1)\n└─ \$ ▶\[\033[0m\] '
 
 if [ -d ~/.bashrc.d ]; then

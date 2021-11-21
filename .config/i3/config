@@ -169,15 +169,14 @@ gaps outer 5
 
 #bar
 bar {
-        font pango:DejaVu Sans Mono,Font Awesome 6 Free Regular 11 
-        position top
-        status_command ~/.config/i3/bumblebee-status/bumblebee-status \
-          -m cpu memory network_traffic nic date time battery  \
-          -p memory.format="{used}/{total}" date.format="%a,%b %d" time.format="%I:%M%p" battery.decorate=false nic.format="" nic.states="^down"   \
-          -t nord-powerline 
+    font pango:DejaVu Sans Mono, Font Awesome 6 Free Regular 11
+    position top
+    separator_symbol "  "
+    status_command i3status --config ~/.config/i3status/i3status.conf
         colors {
             background #2e3440
             statusline #4c566a
+            separator  #5381ac
             #                  border     background   text
             focused_workspace  #2e3440    #2e3440      #8fbbba
             inactive_workspace #2e3440    #2e3440      #4c566a
