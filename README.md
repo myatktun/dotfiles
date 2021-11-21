@@ -1,5 +1,5 @@
 # Gruvbox Color Theme
-Test
+Current Theme
 
 ## Contents
 - os: Fedora 35
