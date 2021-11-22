@@ -177,7 +177,7 @@ colors {
             statusline #ebdbb2
             separator  #fabd2f
             #                  border     background   text
-            focused_workspace  #458588    #1d2021      #458588
+            focused_workspace  #689d6a    #1d2021      #689d6a
             inactive_workspace #d79921    #1d2021      #fabd2f
             urgent_workspace   $urgent    $urgent      $text
           }
