@@ -54,7 +54,7 @@ command! MakeTags !ctags -R .
 set cursorline 
 set path+=**
 set mouse=a
-set relativenumber
+set number relativenumber
 set smarttab
 set cindent
 set tabstop=2
