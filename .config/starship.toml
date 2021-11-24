@@ -1,0 +1,59 @@
+[character]
+error_symbol = "[✖](bold red) "
+success_symbol = "[❯❯](bold #458588)"
+
+[cmd_duration]
+min_time = 10_000  # Show command duration over 10,000 milliseconds (=10 sec)
+format = " took [$duration]($style)"
+
+[directory]
+truncation_length = 3
+format = "[$path]($style)[$read_only]($read_only_style)"
+style = "bold #8ec07c"
+truncation_symbol = ""
+
+[git_branch]
+format = " on [$symbol$branch]($style)"
+symbol = " "
+style = "bold #b8bb26"
+
+[git_commit]
+commit_hash_length = 8
+format = "[\\($hash$tag\\)]($style) "
+style = "bold white"
+disabled = false
+
+[git_state]
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+
+[git_status]
+conflicted = "[≠](red)"
+ahead = "[ﰵ${count}]($style)"
+behind = "[ﰬ${count}]($style)"
+diverged = "[ﰵ${ahead_count}ﰬ${behind_count}]($style)"
+untracked = "[${count}](#458588)"
+stashed = "📦 "
+modified = "[${count}](#fabd2f)"
+staged = "[${count}](#b8bb26)"
+renamed = "[${count}]($style)"
+deleted = "[✘${count}](#cc241d)"
+style = "#ebdbb2"
+format = '([ \[$all_status$ahead_behind\]]($style))'
+
+[hostname]
+ssh_only = false
+format = "<[$hostname]($style)>"
+trim_at = "-"
+style = "bold dimmed white"
+disabled = true
+
+[package]
+disabled = true
+
+[python]
+format = " [$symbol$version]($style) "
+style = "bold green"
+
+[username]
+style_user = "bold dimmed blue"
+show_always = false
