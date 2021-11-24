@@ -118,6 +118,9 @@ let g:coc_global_extensions = [
   \ 'coc-jedi',
   \ 'coc-html-css-support',
   \ 'coc-sql',
+  \ 'coc-rust-analyzer',
+  \ 'coc-rls',
+  \ 'coc-toml'
   \ ]
 
 " if hidden is not set, TextEdit might fail.
