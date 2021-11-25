@@ -7,7 +7,7 @@ min_time = 10_000  # Show command duration over 10,000 milliseconds (=10 sec)
 format = " took [$duration]($style)"
 
 [directory]
-truncation_length = 3
+truncation_length = 4
 format = "[$path]($style)[$read_only]($read_only_style)"
 style = "bold #8ec07c"
 truncation_symbol = ""
