@@ -1,3 +1,4 @@
+"Plugins
 "Specify a directory for plugins
 call plug#begin('~/.config/nvim/plugged')
 
@@ -26,6 +27,7 @@ Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
+"Themes
 "Gruvbox settings
 let g:gruvbox_contrast_dark='hard'
 colorscheme gruvbox
@@ -42,14 +44,15 @@ colorscheme gruvbox
 " let g:nord_underline = 1
 " colorscheme nord
 
-" airline settings
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts=1
-let g:airline#extensions#branch#enabled = 1
-" let g:airline#extensions#tabline#formatter = 'unique_tail'
+" Global settings
+augroup remember_folds
+  autocmd!
+  autocmd BufWinLeave * mkview
+  autocmd BufWinEnter * silent! loadview
+augroup END
 
-let mapleader=";"
 command! MakeTags !ctags -R .
+autocmd FileType toml setlocal commentstring=#\ %s
 
 set cursorline 
 set path+=**
@@ -64,6 +67,14 @@ set splitright
 set splitbelow
 set showcmd
 
+" airline settings
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts=1
+let g:airline#extensions#branch#enabled = 1
+" let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+let mapleader=";"
+
 "Tweaks for browsing
 let g:netrw_banner=0
 let g:netrw_browse_split=4 "open in prior window
@@ -72,6 +83,7 @@ let g:netrw_liststyle=3    "tree view
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\s\+'
 
+" Keybinds
 inoremap jj <ESC>
 
 "Change Tabs
@@ -118,8 +130,6 @@ let g:coc_global_extensions = [
   \ 'coc-jedi',
   \ 'coc-html-css-support',
   \ 'coc-sql',
-  \ 'coc-rust-analyzer',
-  \ 'coc-rls',
   \ 'coc-toml'
   \ ]
 
@@ -137,8 +147,7 @@ set shortmess+=c
 set signcolumn=yes
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm(): "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)

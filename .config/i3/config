@@ -8,7 +8,7 @@ exec_always --no-startup-id feh --bg-fill /home/stew/Pictures/3.png
 set $mod Mod4
 
 # font
-font pango:Fura Code Nerd Font Complete 9
+font pango:FuraCode NF 9
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
