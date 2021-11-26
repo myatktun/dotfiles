@@ -85,33 +85,33 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-set $ws1 "1"
-set $ws2 "2"
+set $workspaceT ""
+set $workspaceB ""
 set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5"
-set $workspaceT ""
-set $workspaceB ""
+set $ws5 "6"
+set $ws5 "7"
+set $ws5 "8"
 set $workspaceA ""
 
 # switch to workspace
-bindsym $mod+1 workspace number $ws1
-bindsym $mod+2 workspace number $ws2
+bindsym $mod+1 workspace $workspaceT
+bindsym $mod+2 workspace $workspaceB
 bindsym $mod+3 workspace number $ws3
 bindsym $mod+4 workspace number $ws4
 bindsym $mod+5 workspace number $ws5
-bindsym $mod+t workspace $workspaceT
-bindsym $mod+b workspace $workspaceB
 bindsym $mod+9 workspace $workspaceA
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+1 move container to workspace $workspaceT
+bindsym $mod+Shift+2 move container to workspace $workspaceB
 bindsym $mod+Shift+3 move container to workspace number $ws3
 bindsym $mod+Shift+4 move container to workspace number $ws4
 bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+t move container to workspace $workspaceT
-bindsym $mod+Shift+b move container to workspace $workspaceB
+bindsym $mod+Shift+6 move container to workspace number $ws5
+bindsym $mod+Shift+7 move container to workspace number $ws5
+bindsym $mod+Shift+8 move container to workspace number $ws5
 bindsym $mod+Shift+9 move container to workspace $workspaceA
 
 assign [class="jetbrains-studio"] $workspaceA
@@ -176,8 +176,8 @@ colors {
             statusline #ebdbb2
             separator  #fabd2f
             #                  border     background   text
-            focused_workspace  #1d2021    #1d2021      #689d6a
-            inactive_workspace #1d2021    #1d2021      #fabd2f
+            focused_workspace  #1d2021    #1d2021      #8ec07c
+            inactive_workspace #1d2021    #1d2021      #7c6f64
             urgent_workspace   #1d2021    $urgent      $text
           }
 }
