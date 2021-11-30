@@ -23,6 +23,7 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 " Plug 'christoomey/vim-sort-motion'
 
 call plug#end()
@@ -45,14 +46,9 @@ colorscheme gruvbox
 " colorscheme nord
 
 " Global settings
-augroup remember_folds
-  autocmd!
-  autocmd BufWinLeave * mkview
-  autocmd BufWinEnter * silent! loadview
-augroup END
-
-command! MakeTags !ctags -R .
 autocmd FileType toml setlocal commentstring=#\ %s
+autocmd FileType cfg setlocal commentstring=//\ %s
+command! MakeTags !ctags -R .
 
 set cursorline 
 set path+=**
@@ -85,6 +81,8 @@ let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\s\+'
 
 " Keybinds
 inoremap jj <ESC>
+nnoremap <leader>mv :mkview<CR>
+nnoremap <leader>lv :loadview<CR>
 
 "Change Tabs
 nnoremap <leader>j gT
