@@ -27,4 +27,3 @@ vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', options)
 
 vim.api.nvim_set_keymap('v', '<', '<gv', options)
 vim.api.nvim_set_keymap('v', '>', '>gv', options)
-
