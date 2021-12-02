@@ -10,11 +10,14 @@ end
 return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
   use 'tpope/vim-commentary'
-  use {'kyazdani42/nvim-tree.lua',requires = {'kyazdani42/nvim-web-devicons'},config = require'nvim-tree'.setup {}}
+  use {'kyazdani42/nvim-tree.lua',requires = {'kyazdani42/nvim-web-devicons'}, config = require'nvim-tree'.setup {}}
   use {'morhetz/gruvbox', config = vim.cmd[[colorscheme gruvbox]]}
   use {'famiu/feline.nvim', config = require('feline').setup()}
-  use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'},config =require('gitsigns').setup()}
+  use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}, config = require('gitsigns').setup()}
   use 'christoomey/vim-system-copy'
   use 'tpope/vim-surround'
+  use 'neovim/nvim-lspconfig'
+  use 'hrsh7th/nvim-compe'
+  use 'hrsh7th/vim-vsnip'
 
 end)
