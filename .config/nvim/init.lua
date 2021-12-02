@@ -29,7 +29,7 @@ vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', options)
 vim.api.nvim_set_keymap('v', '<', '<gv', options)
 vim.api.nvim_set_keymap('v', '>', '>gv', options)
 
-vim.api.nvim_set_keymap('n', '<leader>f', 'gg=G', options)
+vim.api.nvim_set_keymap('n', '<leader>f', 'gg=G<C-o>', options)
 
 vim.api.nvim_set_keymap('n', '<leader>t', '<cmd>lua require(\'telescope.builtin\').find_files()<CR>', options)
 
