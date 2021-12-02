@@ -9,3 +9,4 @@ vim.o.splitright = true
 vim.o.splitbelow = true
 vim.o.showcmd = true
 vim.o.termguicolors = true
+vim.cmd[[colorscheme gruvbox]]
