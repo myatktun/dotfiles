@@ -29,6 +29,10 @@ vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', options)
 vim.api.nvim_set_keymap('v', '<', '<gv', options)
 vim.api.nvim_set_keymap('v', '>', '>gv', options)
 
+vim.api.nvim_set_keymap('n', '<leader>f', 'gg=G', options)
+
+vim.api.nvim_set_keymap('n', '<leader>t', '<cmd>lua require(\'telescope.builtin\').find_files()<CR>', options)
+
 ---------------------------- Colorscheme --------------------------------
 
 vim.cmd[[colorscheme gruvbox]]
@@ -53,5 +57,6 @@ require('plugins')
 require('nv-cmp.init')
 require('nvim-lsp.init')
 require'nvim-tree'.setup {}
-require('feline').setup()
 require('gitsigns').setup()
+require('nvim-autopairs').setup{}
+require("feline").setup()

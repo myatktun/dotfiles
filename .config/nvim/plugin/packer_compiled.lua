@@ -94,6 +94,11 @@ _G.packer_plugins = {
     path = "/home/stew/.local/share/nvim/site/pack/packer/start/gruvbox",
     url = "https://github.com/morhetz/gruvbox"
   },
+  ["nvim-autopairs"] = {
+    loaded = true,
+    path = "/home/stew/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
+    url = "https://github.com/windwp/nvim-autopairs"
+  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/home/stew/.local/share/nvim/site/pack/packer/start/nvim-cmp",
