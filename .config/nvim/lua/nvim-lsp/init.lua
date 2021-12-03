@@ -17,6 +17,9 @@ vim.api.nvim_exec([[autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil
 local servers = { 'html','cssls','pyright', 'rust_analyzer', 'tsserver' }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
+root_dir = function(fname)
+    return vim.fn.getcwd() 
+end,
       on_attach = on_attach,
       flags = {
         debounce_text_changes = 150,
