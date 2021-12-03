@@ -12,7 +12,6 @@ return require('packer').startup(function()
   use 'tpope/vim-commentary'
   use {'kyazdani42/nvim-tree.lua',requires = {'kyazdani42/nvim-web-devicons'}}
   use 'morhetz/gruvbox'
-  use 'famiu/feline.nvim'
   use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}}
   use 'christoomey/vim-system-copy'
   use 'tpope/vim-surround'
@@ -21,5 +20,6 @@ return require('packer').startup(function()
   use {'hrsh7th/nvim-cmp', requires = {'hrsh7th/vim-vsnip', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-vsnip'}}
   use 'lukas-reineke/indent-blankline.nvim'
   use {'nvim-telescope/telescope.nvim',  requires = {'nvim-lua/plenary.nvim'}}
+  use 'nvim-lualine/lualine.nvim' 
 
 end)

@@ -56,7 +56,7 @@ vim.o.termguicolors = true
 require('plugins')
 require('nv-cmp.init')
 require('nvim-lsp.init')
-require'nvim-tree'.setup {}
+require('nvim-tree').setup() 
 require('gitsigns').setup()
-require('nvim-autopairs').setup{}
-require("feline").setup()
+require('nvim-autopairs').setup()
+require('lualine').setup()
