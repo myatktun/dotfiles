@@ -34,9 +34,11 @@ vim.api.nvim_set_keymap('n', '<leader>k', 'gt', options)
 --load html scheme
 vim.api.nvim_set_keymap('n', '<leader>html', ':-1read $HOME/.config/nvim/.skeleton.html<CR>4jwf>a', options)
 
---toggle terminal (<number>key will open specific terminal)
-vim.api.nvim_set_keymap('', '<C-t>', ':ToggleTerm<CR>', options)
+--toggle terminal (<number><C-t> will open specific terminal)
+vim.api.nvim_set_keymap('n', '<C-t>', '<Cmd>exe v:count1 . \"ToggleTerm\"<CR>', options)
+vim.api.nvim_set_keymap('i', '<C-t>', '<Esc><Cmd>exe v:count1 . \"ToggleTerm\"<CR>', options)
 vim.api.nvim_set_keymap('t', '<C-t>', '<C-\\><C-n> :ToggleTerm<CR>', options)
+vim.api.nvim_set_keymap('', '<leader><C-t>', ':ToggleTermToggleAll<CR>', options)
 
 --Esc in terminal mode
 vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', options)
@@ -50,7 +52,10 @@ vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', options)
 vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', options)
 vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', options)
 vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', options)
-
+vim.api.nvim_set_keymap('t', '<C-h>', '<C-\\><C-n><C-w>h', options)
+vim.api.nvim_set_keymap('t', '<C-j>', '<C-\\><C-n><C-w>j', options)
+vim.api.nvim_set_keymap('t', '<C-k>', '<C-\\><C-n><C-w>k', options)
+vim.api.nvim_set_keymap('t', '<C-l>', '<C-\\><C-n><C-w>l', options)
 
 --indent in visual mode
 vim.api.nvim_set_keymap('v', '<', '<gv', options)
@@ -60,7 +65,7 @@ vim.api.nvim_set_keymap('v', '>', '>gv', options)
 vim.api.nvim_set_keymap('n', '<leader>f', 'gg=G<C-o>', options)
 
 --open telescope
-vim.api.nvim_set_keymap('n', '<leader>t', '<cmd>lua require(\'telescope.builtin\').find_files()<CR>', options)
+vim.api.nvim_set_keymap('n', '<leader>t', '<Cmd>lua require(\'telescope.builtin\').find_files()<CR>', options)
 
 ---------------------------- Colorscheme ---------------------------------------------
 
@@ -75,4 +80,4 @@ require('nvim-tree').setup()
 require('gitsigns').setup()
 require('nvim-autopairs').setup()
 require('lualine').setup({options = {theme = 'gruvbox_dark'}})
-require('toggleterm').setup{}
+require('tterm.init')
