@@ -56,3 +56,4 @@ local cmp = require'cmp'
   -- require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
   --   capabilities = capabilities
   -- }
+-- If you want insert `(` after select function or method item
