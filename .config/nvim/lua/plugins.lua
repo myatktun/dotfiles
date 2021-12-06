@@ -17,10 +17,12 @@ return require('packer').startup(function()
   use 'christoomey/vim-system-copy'
   use 'tpope/vim-surround'
   use 'neovim/nvim-lspconfig'
-  use 'windwp/nvim-autopairs'
-  use {'hrsh7th/nvim-cmp', requires = {'hrsh7th/vim-vsnip', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-vsnip'}}
+  use 'mattn/emmet-vim'
+  use {'hrsh7th/nvim-cmp', requires = {'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer'}}
   use 'lukas-reineke/indent-blankline.nvim'
   use {'nvim-telescope/telescope.nvim',  requires = {'nvim-lua/plenary.nvim'}}
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use 'nvim-lualine/lualine.nvim' 
+  use 'davidgranstrom/nvim-markdown-preview'
 
 end)
