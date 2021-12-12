@@ -99,10 +99,20 @@ _G.packer_plugins = {
     path = "/home/stew/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
+  ["jupyter_ascending.vim"] = {
+    loaded = true,
+    path = "/home/stew/.local/share/nvim/site/pack/packer/start/jupyter_ascending.vim",
+    url = "https://github.com/untitled-ai/jupyter_ascending.vim"
+  },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/home/stew/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
+  },
+  ["luatab.nvim"] = {
+    loaded = true,
+    path = "/home/stew/.local/share/nvim/site/pack/packer/start/luatab.nvim",
+    url = "https://github.com/alvarosevilla95/luatab.nvim"
   },
   ["nvim-cmp"] = {
     loaded = true,
