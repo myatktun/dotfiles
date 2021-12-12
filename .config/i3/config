@@ -3,6 +3,7 @@ exec_always --no-startup-id xrandr --output eDP-1 --off --output HDMI-1 --primar
 
 # load wallpaper
 exec_always --no-startup-id feh --bg-fill /home/stew/Pictures/3.png
+exec_always --no-startup-id xinput --set-prop 25 'libinput Accel Profile Enabled' 0, 1
 exec_always --no-startup-id xinput --set-prop 16 'libinput Accel Profile Enabled' 0, 1
 
 # set mod
@@ -28,7 +29,6 @@ bindsym $mod+Shift+Return exec kitty
 # open chrome
 bindsym $mod+Shift+g exec google-chrome
 bindsym $mod+g workspace $workspace2; exec google-chrome
-
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -136,6 +136,8 @@ bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+Control+e exec i3-msg exit
+# exec --no-startup-id compton --config  ~/.config/i3/i3lock_temp/compton.conf
+# bindsym $mod+Shift+e exec --no-startup-id ~/.config/i3/i3lock_temp/matrixlock.sh
 
 # resize window (you can also use the mouse for that)
 mode "resize" {

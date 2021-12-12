@@ -17,6 +17,7 @@ return require('packer').startup(function()
   use 'christoomey/vim-system-copy'
   use 'tpope/vim-surround'
   use 'neovim/nvim-lspconfig'
+  use 'tpope/vim-fugitive'
   use 'mattn/emmet-vim'
   use {'hrsh7th/nvim-cmp', requires = {'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer'}}
   use 'lukas-reineke/indent-blankline.nvim'
@@ -24,5 +25,5 @@ return require('packer').startup(function()
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use 'nvim-lualine/lualine.nvim' 
   use 'davidgranstrom/nvim-markdown-preview'
-
+  use { "untitled-ai/jupyter_ascending.vim" }
 end)
