@@ -136,8 +136,6 @@ bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+Control+e exec i3-msg exit
-# exec --no-startup-id compton --config  ~/.config/i3/i3lock_temp/compton.conf
-# bindsym $mod+Shift+e exec --no-startup-id ~/.config/i3/i3lock_temp/matrixlock.sh
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -179,6 +177,7 @@ client.background        $unfocus
 # gaps and borders
 gaps inner 4
 gaps outer 7
+gaps top 0
 
 bar {
     font pango:DejaVu Sans Mono, Font Awesome 6 Free Regular 11

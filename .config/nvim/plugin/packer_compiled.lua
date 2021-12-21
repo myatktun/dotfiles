@@ -109,11 +109,6 @@ _G.packer_plugins = {
     path = "/home/stew/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
-  ["luatab.nvim"] = {
-    loaded = true,
-    path = "/home/stew/.local/share/nvim/site/pack/packer/start/luatab.nvim",
-    url = "https://github.com/alvarosevilla95/luatab.nvim"
-  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/home/stew/.local/share/nvim/site/pack/packer/start/nvim-cmp",
@@ -169,6 +164,11 @@ _G.packer_plugins = {
     path = "/home/stew/.local/share/nvim/site/pack/packer/start/vim-commentary",
     url = "https://github.com/tpope/vim-commentary"
   },
+  ["vim-fugitive"] = {
+    loaded = true,
+    path = "/home/stew/.local/share/nvim/site/pack/packer/start/vim-fugitive",
+    url = "https://github.com/tpope/vim-fugitive"
+  },
   ["vim-surround"] = {
     loaded = true,
     path = "/home/stew/.local/share/nvim/site/pack/packer/start/vim-surround",
@@ -178,6 +178,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/stew/.local/share/nvim/site/pack/packer/start/vim-system-copy",
     url = "https://github.com/christoomey/vim-system-copy"
+  },
+  ["vim-titlecase"] = {
+    loaded = true,
+    path = "/home/stew/.local/share/nvim/site/pack/packer/start/vim-titlecase",
+    url = "https://github.com/christoomey/vim-titlecase"
   }
 }
 
