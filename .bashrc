@@ -33,6 +33,7 @@ export PATH
 # . /usr/local/lib/python3.10/site-packages/powerline/bindings/bash/powerline.sh
 
 eval "$(starship init bash)"
+bind 'TAB:menu-complete'
 
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
