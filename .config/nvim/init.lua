@@ -33,6 +33,12 @@ vim.api.nvim_set_keymap('n', '<F12>', ':!google-chrome %<CR>', options)
 vim.api.nvim_set_keymap('n', '<leader>h', 'gT', options)
 vim.api.nvim_set_keymap('n', '<leader>l', 'gt', options)
 
+----move selected lines up or down
+vim.api.nvim_set_keymap('n', '<A-k>', ':m .-2<CR>==', options)
+vim.api.nvim_set_keymap('n', '<A-j>', ':m.+1<CR>==', options)
+vim.api.nvim_set_keymap('v', '<A-k>', ':m-2<CR>gv=gv', options)
+vim.api.nvim_set_keymap('v', '<A-j>', ':m\'>+<CR>gv=gv', options)
+
 ----find & rename word under cursor
 vim.api.nvim_set_keymap('n', '<leader>rn', '* :%s//', options)
 

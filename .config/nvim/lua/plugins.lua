@@ -16,6 +16,7 @@ return require('packer').startup(function()
   use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}}
   use 'christoomey/vim-system-copy'
   use 'tpope/vim-surround'
+  use 'christoomey/vim-titlecase'
   use 'neovim/nvim-lspconfig'
   use 'tpope/vim-fugitive'
   use 'mattn/emmet-vim'
