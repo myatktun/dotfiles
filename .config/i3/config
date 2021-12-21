@@ -182,12 +182,12 @@ gaps top 0
 bar {
     font pango:DejaVu Sans Mono, Font Awesome 6 Free Regular 11
     position top
-    separator_symbol "  "
+    separator_symbol " | "
     status_command i3status --config ~/.config/i3status/i3status.conf
 colors {
             background #1d2021
             statusline #ebdbb2
-            separator  #fabd2f
+            # separator  #fabd2f
             #                  border     background   text
             focused_workspace  #1d2021    #1d2021      #8ec07c
             inactive_workspace #1d2021    #1d2021      #7c6f64
