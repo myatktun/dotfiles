@@ -139,19 +139,19 @@ bindsym $mod+Shift+Control+e exec i3-msg exit
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym j resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
+  bindsym h resize shrink width 10 px or 10 ppt
+    bindsym k resize grow height 10 px or 10 ppt
+    bindsym j resize shrink height 10 px or 10 ppt
+    bindsym l resize grow width 10 px or 10 ppt
 
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
 
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
 }
 
 bindsym $mod+r mode "resize"
@@ -180,17 +180,17 @@ gaps outer 7
 gaps top 0
 
 bar {
-    font pango:DejaVu Sans Mono, Font Awesome 6 Free Regular 11
+  font pango:DejaVu Sans Mono, Font Awesome 6 Free Regular 11
     position top
     separator_symbol " | "
     status_command i3status --config ~/.config/i3status/i3status.conf
-colors {
-            background #1d2021
-            statusline #ebdbb2
-            # separator  #fabd2f
-            #                  border     background   text
-            focused_workspace  #1d2021    #1d2021      #8ec07c
-            inactive_workspace #1d2021    #1d2021      #7c6f64
-            urgent_workspace   #1d2021    #1d2021      $urgent
-          }
+    colors {
+      background #1d2021
+        statusline #ebdbb2
+# separator  #fabd2f
+#                  border     background   text
+        focused_workspace  #1d2021    #1d2021      #8ec07c
+        inactive_workspace #1d2021    #1d2021      #7c6f64
+        urgent_workspace   #1d2021    #1d2021      $urgent
+    }
 }
