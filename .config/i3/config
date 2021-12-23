@@ -24,6 +24,7 @@ floating_modifier $mod
 
 # open a terminal
 bindsym $mod+Return workspace $workspace1; exec kitty
+bindsym $mod+Shift+t exec kitty -e tmux
 bindsym $mod+Shift+Return exec kitty
 
 # open chrome
