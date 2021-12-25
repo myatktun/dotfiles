@@ -178,6 +178,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/stew/.local/share/nvim/site/pack/packer/start/vim-titlecase",
     url = "https://github.com/christoomey/vim-titlecase"
+  },
+  ["vim-vsnip"] = {
+    loaded = true,
+    path = "/home/stew/.local/share/nvim/site/pack/packer/start/vim-vsnip",
+    url = "https://github.com/hrsh7th/vim-vsnip"
   }
 }
 

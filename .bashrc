@@ -26,17 +26,14 @@ export PATH
 # Brown       0;33     Yellow        1;33
 # Light Gray  0;37     White         1;37
 
-# enabling powerline
-# powerline-daemon -q
-# POWERLINE_BASH_CONTINUATION=1
-# POWERLINE_BASH_SELECT=1
-# . /usr/local/lib/python3.10/site-packages/powerline/bindings/bash/powerline.sh
+# auto start tmux
 if [[ ! $TERM =~ screen ]]; then
+  ## load tmux with script
+  # tmux attach|| ~/.config/tmux.sh
   tmux attach || tmux new
 fi
 
 eval "$(starship init bash)"
-# [[ $TERM != "screen" ]] && tmux
 
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
@@ -57,6 +54,12 @@ export GIT_PS1_SHOWDIRTYSTATE=true
 export GIT_PS1_SHOWUNTRACKEDFILES=true
 export GIT_PS1_SHOWUPSTREAM="verbose"
 export GIT_PS1_SHOWCOLORHINTS=true
+
+# fzf key-bindings
+if [ -x "$(command -v fzf)"  ]
+then
+  source /usr/share/fzf/shell/key-bindings.bash
+fi
 
 function mkcd
 {
