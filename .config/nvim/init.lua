@@ -45,17 +45,6 @@ vim.api.nvim_set_keymap('n', '<leader>rn', '* :%s//', options)
 ----load html scheme
 vim.api.nvim_set_keymap('n', ';html', ':-1read $HOME/.config/nvim/.skeleton.html<CR>4jwf>a', options)
 
-----toggle terminal (<number><C-t> will open specific terminal)
--- vim.api.nvim_set_keymap('n', '<C-t>', '<Cmd>exe v:count1 . \"ToggleTerm\" \"direction=horizontal\"<CR>', options)
--- vim.api.nvim_set_keymap('n', '<C-A-t>', '<Cmd>exe v:count1 . \"ToggleTerm\" \"direction=vertical\" \"size=40\"<CR>', options)
--- vim.api.nvim_set_keymap('i', '<C-t>', '<Esc><Cm>exe v:count1 . \"ToggleTerm\"<CR>', options)
--- vim.api.nvim_set_keymap('t', '<C-t>', '<C-\\><C-n> :ToggleTerm<CR>', options)
--- vim.api.nvim_set_keymap('', '<leader><C-t>', ':ToggleTermToggleAll<CR>', options)
--- vim.api.nvim_set_keymap('t', ';<C-t>', '<C-\\><C-n>:ToggleTermToggleAll<CR>', options)
-
-----Esc in terminal mode
-vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', options)
-
 ----Nvimtree
 vim.api.nvim_set_keymap('n', '<C-n>', ':NvimTreeToggle<CR>', options)
 vim.api.nvim_set_keymap('n', '<leader>n', ':NvimTreeFocus<CR>', options)
@@ -65,10 +54,6 @@ vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', options)
 vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', options)
 vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', options)
 vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', options)
-vim.api.nvim_set_keymap('t', '<C-h>', '<C-\\><C-n><C-w>h', options)
-vim.api.nvim_set_keymap('t', '<C-j>', '<C-\\><C-n><C-w>j', options)
-vim.api.nvim_set_keymap('t', '<C-k>', '<C-\\><C-n><C-w>k', options)
-vim.api.nvim_set_keymap('t', '<C-l>', '<C-\\><C-n><C-w>l', options)
 
 ----indent in visual mode
 vim.api.nvim_set_keymap('v', '<', '<gv', options)
