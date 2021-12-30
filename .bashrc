@@ -29,7 +29,7 @@ export PATH
 # auto start tmux
 if [[ ! $TERM =~ screen ]]; then
   ## load tmux with script
-  # tmux attach|| ~/.config/tmux.sh
+  # tmux attach ||exec ide
   tmux attach || tmux new
 fi
 

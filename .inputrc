@@ -85,5 +85,6 @@ $if mode=vi
   # /: '__fzf_history__'
   # insert mode             
   set keymap vi-insert                          
+  Control-l: clear-screen
   "jj": vi-movement-mode # remap escape   
 $endif
