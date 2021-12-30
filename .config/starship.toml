@@ -20,6 +20,7 @@ style = "bold #b16286"
 
 [git_commit]
 commit_hash_length = 8
+only_detached = true
 format = "[\\($hash$tag\\)]($style) "
 style = "bold white"
 disabled = false

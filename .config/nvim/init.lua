@@ -18,8 +18,9 @@ vim.cmd([[autocmd BufEnter * silent! lcd %:p:h]])
 
 ---------------------------- Keybinds ---------------------------------------------------------
 
-----leader
 local options = { noremap = true, silent = true}
+
+----leader
 vim.api.nvim_set_keymap('n', '<Space>', '<NOP>', options)
 vim.g.mapleader= ' '
 
@@ -46,7 +47,7 @@ vim.api.nvim_set_keymap('n', '<leader>rn', '* :%s//', options)
 vim.api.nvim_set_keymap('n', ';html', ':-1read $HOME/.config/nvim/.skeleton.html<CR>4jwf>a', options)
 
 ----Nvimtree
-vim.api.nvim_set_keymap('n', '<C-n>', ':NvimTreeToggle<CR>', options)
+vim.api.nvim_set_keymap('n', '<C-n>', ':NvimTreeFindFileToggle<CR>', options)
 vim.api.nvim_set_keymap('n', '<leader>n', ':NvimTreeFocus<CR>', options)
 
 ----better window navigation
@@ -71,6 +72,7 @@ vim.api.nvim_set_keymap('n', '<leader>f', 'gg=G<C-o>', options)
 
 ----open telescope
 vim.api.nvim_set_keymap('n', '<leader>tf', '<Cmd>lua require(\'telescope.builtin\').find_files()<CR>', options)
+-- vim.api.nvim_set_keymap('n', '<leader>tf.', '<Cmd>lua require(\'telescope.builtin\').find_files({cwd = \'../\'})<CR>', options)
 vim.api.nvim_set_keymap('n', '<leader>tl', '<Cmd>lua require(\'telescope.builtin\').live_grep()<CR>', options)
 vim.api.nvim_set_keymap('n', '<leader>ts', '<Cmd>lua require(\'telescope.builtin\').grep_string()<CR>', options)
 vim.api.nvim_set_keymap('n', '<leader>tcb', '<Cmd>lua require(\'telescope.builtin\').current_buffer_fuzzy_find()<CR>', options)
