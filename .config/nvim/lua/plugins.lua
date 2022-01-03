@@ -20,7 +20,7 @@ return require('packer').startup(function()
   use 'neovim/nvim-lspconfig'
   use 'tpope/vim-fugitive'
   use 'mattn/emmet-vim'
-  use {'hrsh7th/nvim-cmp', requires = {'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'hrsh7th/vim-vsnip'}}
+  use {'hrsh7th/nvim-cmp', requires = {'hrsh7th/cmp-vsnip','hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'hrsh7th/vim-vsnip'}}
   use 'lukas-reineke/indent-blankline.nvim'
   use {'nvim-telescope/telescope.nvim',  requires = {'nvim-lua/plenary.nvim'}}
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
