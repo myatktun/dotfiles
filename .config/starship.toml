@@ -29,16 +29,16 @@ disabled = false
 format = '[\($state( $progress_current of $progress_total)\)]($style) '
 
 [git_status]
+modified = "[✘${count}](#fabd2f)"
+staged = "[${count}](#b8bb26)"
+renamed = "[${count}]($style)"
+untracked = "[${count}](#458588)"
+deleted = "[${count}](#cc241d)"
 conflicted = "[≠](red)"
 ahead = "[ﰵ${count}]($style)"
 behind = "[ﰬ${count}]($style)"
 diverged = "[ﰵ${ahead_count}ﰬ${behind_count}]($style)"
-untracked = "[${count}](#458588)"
 stashed = "📦 "
-modified = "[✘${count}](#fabd2f)"
-staged = "[${count}](#b8bb26)"
-renamed = "[${count}]($style)"
-deleted = "[${count}](#cc241d)"
 style = "#ebdbb2"
 format = '([ \[$all_status$ahead_behind\]]($style))'
 

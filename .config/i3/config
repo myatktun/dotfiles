@@ -167,10 +167,10 @@ bindsym $mod+r mode "resize"
 for_window [class=".*"] border pixel 2
 
 set $bgcolor        #1d2021
-set $border         #8ec07c
+set $border         #fbf1c7
 set $text           #ebdbb2
 set $urgent         #cc241d
-set $unfocus        #d65d0e
+set $unfocus        #1d2021
 
 # gaps and borders colors
 # Property Name          Border   BG       Text     Indicator 
