@@ -15,6 +15,7 @@ vim.o.hidden = true
 vim.o.showtabline = 2
 vim.cmd([[command! MakeTags !ctags -R .]])
 vim.cmd([[autocmd BufEnter * silent! lcd %:p:h]])
+vim.cmd([[autocmd FileType kivy setlocal commentstring=#\ %s]])
 
 ---------------------------- Keybinds ---------------------------------------------------------
 
