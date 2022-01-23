@@ -6,6 +6,7 @@ vim.o.relativenumber = true
 vim.o.number = true
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
+vim.o.softtabstop = 2
 vim.o.expandtab = true
 vim.o.splitright = true
 vim.o.splitbelow = true
@@ -16,6 +17,7 @@ vim.o.showtabline = 2
 vim.cmd([[command! MakeTags !ctags -R .]])
 vim.cmd([[autocmd BufEnter * silent! lcd %:p:h]])
 vim.cmd([[autocmd FileType kivy setlocal commentstring=#\ %s]])
+vim.cmd([[autocmd BufRead,BufNewFile *.c setlocal shiftwidth=8 tabstop=8 softtabstop=8 cc=81 cindent noet]])
 
 ---------------------------- Keybinds ---------------------------------------------------------
 
