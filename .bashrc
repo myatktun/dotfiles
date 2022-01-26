@@ -37,6 +37,9 @@ eval "$(starship init bash)"
 export EDITOR="$(which nvim)"
 
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias checkpatch=$HOME/Linux/linux_mainline/scripts/checkpatch.pl
+alias get_maintainer=$HOME/Linux/linux_mainline/scripts/get_maintainer.pl
+alias update-grub='sudo grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg'
 
 # go path
 export GOPATH=$HOME/.go
@@ -50,11 +53,11 @@ eval "$(pyenv init -)"
 # eval "$(pyenv virtualenv-init -)"
 
 # to display git status
-source ~/.git-prompt.sh
-export GIT_PS1_SHOWDIRTYSTATE=true
-export GIT_PS1_SHOWUNTRACKEDFILES=true
-export GIT_PS1_SHOWUPSTREAM="verbose"
-export GIT_PS1_SHOWCOLORHINTS=true
+# source ~/.git-prompt.sh
+# export GIT_PS1_SHOWDIRTYSTATE=true
+# export GIT_PS1_SHOWUNTRACKEDFILES=true
+# export GIT_PS1_SHOWUPSTREAM="verbose"
+# export GIT_PS1_SHOWCOLORHINTS=true
 
 # fzf key-bindings
 if [ -x "$(command -v fzf)"  ]

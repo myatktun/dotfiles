@@ -15,6 +15,7 @@ vim.o.termguicolors = true
 vim.o.hidden = true
 vim.o.showtabline = 2
 vim.cmd([[command! MakeTags !ctags -R .]])
+vim.cmd([[command! CopyBuffPath let @+ = expand('%:p')]])
 vim.cmd([[autocmd BufEnter * silent! lcd %:p:h]])
 vim.cmd([[autocmd FileType kivy setlocal commentstring=#\ %s]])
 vim.cmd([[autocmd BufRead,BufNewFile *.c setlocal shiftwidth=8 tabstop=8 softtabstop=8 cc=81 cindent noet]])
@@ -34,8 +35,8 @@ vim.api.nvim_set_keymap('i', 'jj', '<Esc>', options)
 vim.api.nvim_set_keymap('n', '<F12>', ':!google-chrome %<CR>', options)
 
 ----switch tabs
-vim.api.nvim_set_keymap('n', '<leader>h', 'gT', options)
-vim.api.nvim_set_keymap('n', '<leader>l', 'gt', options)
+vim.api.nvim_set_keymap('n', '<leader>h', 'gt', options)
+vim.api.nvim_set_keymap('n', '<leader>l', 'gT', options)
 
 ----move selected lines up or down
 vim.api.nvim_set_keymap('n', '<A-k>', ':m .-2<CR>==', options)
@@ -46,8 +47,12 @@ vim.api.nvim_set_keymap('v', '<A-j>', ':m\'>+<CR>gv=gv', options)
 ----find & rename word under cursor
 vim.api.nvim_set_keymap('n', '<leader>rn', '* :%s//', options)
 
-----load html scheme
+-- delete all buffers except current
+vim.api.nvim_set_keymap('n', '<leader>bd', ':%bd|e#|bd#<CR>', options)
+
+----load scheme
 vim.api.nvim_set_keymap('n', ';html', ':-1read $HOME/.config/nvim/.skeleton.html<CR>4jwf>a', options)
+vim.api.nvim_set_keymap('n', ';ct', ':-1read $HOME/.config/nvim/.skeleton.c<CR>3jo', options)
 
 ----Nvimtree
 vim.api.nvim_set_keymap('n', '<C-n>', ':NvimTreeFindFileToggle<CR>', options)
