@@ -14,7 +14,10 @@ vim.o.showcmd = true
 vim.o.termguicolors = true
 vim.o.hidden = true
 vim.o.showtabline = 2
+vim.g.nvim_tree_respect_buf_cwd = 1
 vim.cmd([[command! MakeTags !ctags -R .]])
+vim.cmd([[command! Make make %< ]])
+vim.cmd([[command! Gcc !gcc -lm -o %< %]])
 vim.cmd([[command! CopyBuffPath let @+ = expand('%:p')]])
 vim.cmd([[autocmd BufEnter * silent! lcd %:p:h]])
 vim.cmd([[autocmd FileType kivy setlocal commentstring=#\ %s]])
@@ -30,6 +33,10 @@ vim.g.mapleader= ' '
 
 ----Esc
 vim.api.nvim_set_keymap('i', 'jj', '<Esc>', options)
+
+-- change directory
+vim.api.nvim_set_keymap('n', '<leader>ch', ':cd ~/', options)
+vim.api.nvim_set_keymap('n', '<leader>cc', ':cd ', options)
 
 ----open current file in chrome
 vim.api.nvim_set_keymap('n', '<F12>', ':!google-chrome %<CR>', options)
@@ -49,6 +56,9 @@ vim.api.nvim_set_keymap('n', '<leader>rn', '* :%s//', options)
 
 -- delete all buffers except current
 vim.api.nvim_set_keymap('n', '<leader>bd', ':%bd|e#|bd#<CR>', options)
+
+-- remove highlights after search
+vim.api.nvim_set_keymap('n', '<leader>/', ':noh<CR>', options)
 
 ----load scheme
 vim.api.nvim_set_keymap('n', ';html', ':-1read $HOME/.config/nvim/.skeleton.html<CR>4jwf>a', options)
