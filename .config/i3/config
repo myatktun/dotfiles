@@ -132,6 +132,7 @@ assign [class="dota2"] $workspace5
 assign [class="csgo_linux64"] $workspace5
 assign [class="Zathura"] $workspace6
 for_window [class="Zathura"] fullscreen enable
+for_window [title="Android Emulator - *PIXEL*"] resize set 560px 1036px
 assign [class="VirtualBox Manager"] $workspace8
 assign [class="jetbrains-studio"] $workspace9
 

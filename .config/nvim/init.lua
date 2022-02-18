@@ -10,6 +10,8 @@ vim.o.softtabstop = 2
 vim.o.expandtab = true
 vim.o.splitright = true
 vim.o.splitbelow = true
+vim.g.user_emmet_leader_key = '<C-Q>'
+vim.o.timeoutlen = 500
 vim.o.showcmd = true
 vim.o.termguicolors = true
 vim.o.hidden = true
@@ -20,6 +22,9 @@ vim.cmd([[command! Make make %< ]])
 vim.cmd([[command! Gcc !gcc -lm -o %< %]])
 vim.cmd([[command! CopyBuffPath let @+ = expand('%:p')]])
 vim.cmd([[autocmd BufEnter * silent! lcd %:p:h]])
+vim.cmd([[autocmd CmdLineEnter : set ignorecase nosmartcase]])
+vim.cmd([[autocmd CmdLineLeave : set noignorecase smartcase]])
+vim.cmd([[autocmd BufEnter * set fo-=o fo-=r fo-=c]])
 vim.cmd([[autocmd FileType kivy setlocal commentstring=#\ %s]])
 vim.cmd([[autocmd BufRead,BufNewFile *.c setlocal shiftwidth=8 tabstop=8 softtabstop=8 cc=81 cindent noet]])
 
@@ -61,7 +66,7 @@ vim.api.nvim_set_keymap('n', '<leader>bd', ':%bd|e#|bd#<CR>', options)
 vim.api.nvim_set_keymap('n', '<leader>/', ':noh<CR>', options)
 
 ----load scheme
-vim.api.nvim_set_keymap('n', ';html', ':-1read $HOME/.config/nvim/.skeleton.html<CR>4jwf>a', options)
+vim.api.nvim_set_keymap('n', ';html', ':-1read $HOME/.config/nvim/.skeleton.html<CR>7jwf>a', options)
 vim.api.nvim_set_keymap('n', ';ct', ':-1read $HOME/.config/nvim/.skeleton.c<CR>3jo', options)
 
 ----Nvimtree
@@ -93,7 +98,6 @@ vim.api.nvim_set_keymap('n', '<leader>f', 'gg=G<C-o>', options)
 
 ----open telescope
 vim.api.nvim_set_keymap('n', '<leader>tf', '<Cmd>lua require(\'telescope.builtin\').find_files()<CR>', options)
--- vim.api.nvim_set_keymap('n', '<leader>tf.', '<Cmd>lua require(\'telescope.builtin\').find_files({cwd = \'../\'})<CR>', options)
 vim.api.nvim_set_keymap('n', '<leader>tl', '<Cmd>lua require(\'telescope.builtin\').live_grep()<CR>', options)
 vim.api.nvim_set_keymap('n', '<leader>ts', '<Cmd>lua require(\'telescope.builtin\').grep_string()<CR>', options)
 vim.api.nvim_set_keymap('n', '<leader>tcb', '<Cmd>lua require(\'telescope.builtin\').current_buffer_fuzzy_find()<CR>', options)
@@ -113,3 +117,4 @@ require('gitsigns').setup()
 require('lualine').setup({options = {theme = 'gruvbox_dark'}, sections = {lualine_z = {'location', '%L'}}, tabline = {lualine_a = {'buffers'}, lualine_z = {'tabs'}}})
 require('telescope').setup({defaults = {sorting_strategy = "ascending"}})
 require('telescope').load_extension('fzf')
+require('colorizer').setup()

@@ -42,7 +42,7 @@ end
 local servers = { 'clangd','bashls', 'html','cssls','pyright', 'rust_analyzer', 'tsserver' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
-    root_dir = util.root_pattern(".git", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt"),
+    root_dir = util.root_pattern(".git", "package.json", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt"),
     on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,

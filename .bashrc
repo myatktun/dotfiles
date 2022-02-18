@@ -36,10 +36,27 @@ fi
 eval "$(starship init bash)"
 export EDITOR="$(which nvim)"
 
+# git setup for config files
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias checkpatch=$HOME/Linux/linux_mainline/scripts/checkpatch.pl
 alias get_maintainer=$HOME/Linux/linux_mainline/scripts/get_maintainer.pl
 alias update-grub='sudo grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg'
+
+# yarn path
+export PATH=$PATH:$HOME/.yarn/bin
+
+# android/sdk path
+export ANDROID_SDK_ROOT=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
+export PATH=$PATH:$ANDROID_SDK_ROOT/tools
+export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+
+# perl path
+PATH="/home/stew/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/stew/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/stew/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/stew/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/stew/perl5"; export PERL_MM_OPT;
 
 # go path
 export GOPATH=$HOME/.go
@@ -85,8 +102,3 @@ fi
 
 unset rc
 
-PATH="/home/stew/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/stew/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/stew/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/stew/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/stew/perl5"; export PERL_MM_OPT;
