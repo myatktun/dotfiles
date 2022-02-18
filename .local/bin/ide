@@ -1,0 +1,57 @@
+#!/bin/bash
+
+check_path() {
+  if [[ ! -z $1 && $1 != linux ]]; then # determine path first
+    path=$(find ~/Projects -type d -iname "$1*" | head -1)
+  elif [[ $1 == linux ]]; then
+    path=~/Linux
+  else
+    path=$(pwd) # default path is current
+  fi
+}
+
+kivy() {
+  tmux send-keys -t ide:1.1 source\ bin/activate \&\& clear Enter
+  tmux send-keys -t ide:1.2 source\ bin/activate \&\& clear Enter
+}
+
+liveserver() {
+  tmux new-window -t ide -c $path
+  tmux send-keys -t ide:2 live-server Enter
+  tmux select-window -t ide:1
+}
+
+sp() {
+  tmux select-pane -t ide:1.2
+  tmux split-window -t ide -c $path -h -p 66
+  tmux split-window -t ide -c $path -h -p 50
+}
+
+yarn() {
+  tmux new-window -t ide -c $path
+  tmux send-keys -t ide:2 yarn\ watch Enter
+  tmux select-window -t ide:1
+  tmux send-keys -t ide:1.2 yarn\ dev Enter
+}
+
+Functions() {
+  for function in "$@"; do
+    $function 2>> /tmp/ide.log
+  done
+}
+
+main() {
+  if ! tmux has-session -t ide; then # create new tmux session if not exist
+    check_path $1
+    tmux new -s ide -c $path -d
+    tmux split-window -t ide -c $path -v -p 30
+    if [[ $# -ge 1 ]]; then
+      Functions "$@"
+    fi
+    tmux send-keys -t ide:1.1 nvim\ . Enter
+    tmux select-pane -t ide:1.1
+  fi
+  tmux switch -t ide
+}
+
+main "$@"
