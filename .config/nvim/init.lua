@@ -3,8 +3,8 @@
 vim.o.cursorline = true
 vim.o.mouse = "a"
 vim.o.relativenumber = true
-vim.o.number = true
 vim.o.tabstop = 2
+vim.o.number = true
 vim.o.shiftwidth = 2
 vim.o.softtabstop = 2
 vim.o.expandtab = true
@@ -13,10 +13,12 @@ vim.o.splitbelow = true
 vim.g.user_emmet_leader_key = '<C-Q>'
 vim.o.timeoutlen = 500
 vim.o.showcmd = true
+-- vim.o.showtabline = 2
 vim.o.termguicolors = true
 vim.o.hidden = true
-vim.o.showtabline = 2
 vim.g.nvim_tree_respect_buf_cwd = 1
+vim.cmd([[autocmd BufWinLeave *.* mkview!]])
+-- vim.cmd([[autocmd BufWinEnter *.* loadview]])
 vim.cmd([[command! MakeTags !ctags -R .]])
 vim.cmd([[command! Make make %< ]])
 vim.cmd([[command! Gcc !gcc -lm -o %< %]])
@@ -46,9 +48,18 @@ vim.api.nvim_set_keymap('n', '<leader>cc', ':cd ', options)
 ----open current file in chrome
 vim.api.nvim_set_keymap('n', '<F12>', ':!google-chrome %<CR>', options)
 
-----switch tabs
-vim.api.nvim_set_keymap('n', '<leader>h', 'gt', options)
-vim.api.nvim_set_keymap('n', '<leader>l', 'gT', options)
+-- switch buffers
+vim.api.nvim_set_keymap('n', '<leader>l', ':BufferLineCycleNext<CR>', options)
+vim.api.nvim_set_keymap('n', '<leader>h', ':BufferLineCyclePrev<CR>', options)
+vim.api.nvim_set_keymap('n', '1<leader>', '<Cmd>BufferLineGoToBuffer 1<CR>', options)
+vim.api.nvim_set_keymap('n', '2<leader>', '<Cmd>BufferLineGoToBuffer 2<CR>', options)
+vim.api.nvim_set_keymap('n', '3<leader>', '<Cmd>BufferLineGoToBuffer 3<CR>', options)
+vim.api.nvim_set_keymap('n', '4<leader>', '<Cmd>BufferLineGoToBuffer 4<CR>', options)
+vim.api.nvim_set_keymap('n', '5<leader>', '<Cmd>BufferLineGoToBuffer 5<CR>', options)
+
+-- move buffers
+vim.api.nvim_set_keymap('n', '<leader>bml', ':BufferLineMoveNext<CR>', options)
+vim.api.nvim_set_keymap('n', '<leader>bmh', ':BufferLineMovePrev<CR>', options)
 
 ----move selected lines up or down
 vim.api.nvim_set_keymap('n', '<A-k>', ':m .-2<CR>==', options)
@@ -110,11 +121,12 @@ vim.cmd([[colorscheme gruvbox]])
 ---------------------------- Plugins -------------------------------------------------
 
 require('plugins')
-require('nv-cmp.init')
-require('nvim-lsp.init')
-require('nvim-tree').setup() 
+require('nvCmp')
+require('nvimLsp')
+require('nvim-tree').setup()
+require('bufferLine')
+require('luaLine')
 require('gitsigns').setup()
-require('lualine').setup({options = {theme = 'gruvbox_dark'}, sections = {lualine_z = {'location', '%L'}}, tabline = {lualine_a = {'buffers'}, lualine_z = {'tabs'}}})
-require('telescope').setup({defaults = {sorting_strategy = "ascending"}})
-require('telescope').load_extension('fzf')
 require('colorizer').setup()
+require('telescope').load_extension('fzf')
+require('telescope').setup({defaults = {sorting_strategy = "ascending"}})

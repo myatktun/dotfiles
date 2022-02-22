@@ -1,7 +1,7 @@
 #!/bin/bash
 
 check_path() {
-  if [[ ! -z $1 && $1 != linux ]]; then # determine path first
+  if [[ ! -z $1 && $1 != linux && $1 != "." ]]; then # determine path first
     path=$(find ~/Projects -type d -iname "$1*" | head -1)
   elif [[ $1 == linux ]]; then
     path=~/Linux
@@ -15,7 +15,7 @@ kivy() {
   tmux send-keys -t ide:1.2 source\ bin/activate \&\& clear Enter
 }
 
-liveserver() {
+lsvr() {
   tmux new-window -t ide -c $path
   tmux send-keys -t ide:2 live-server Enter
   tmux select-window -t ide:1
@@ -27,7 +27,14 @@ sp() {
   tmux split-window -t ide -c $path -h -p 50
 }
 
-yarn() {
+exp() {
+  tmux new-window -t ide -c $path
+  tmux send-keys -t ide:2 yarn\ start Enter
+  tmux select-window -t ide:1
+  # tmux send-keys -t ide:1.2 yarn\ android Enter
+}
+
+ts() {
   tmux new-window -t ide -c $path
   tmux send-keys -t ide:2 yarn\ watch Enter
   tmux select-window -t ide:1
@@ -36,7 +43,7 @@ yarn() {
 
 Functions() {
   for function in "$@"; do
-    $function 2>> /tmp/ide.log
+      $function 2>> /tmp/ide.log
   done
 }
 
@@ -44,7 +51,7 @@ main() {
   if ! tmux has-session -t ide; then # create new tmux session if not exist
     check_path $1
     tmux new -s ide -c $path -d
-    tmux split-window -t ide -c $path -v -p 30
+    tmux split-window -t ide -c $path -v -p 25
     if [[ $# -ge 1 ]]; then
       Functions "$@"
     fi
