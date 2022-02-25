@@ -14,10 +14,12 @@ return require('packer').startup(function()
   use 'christoomey/vim-titlecase'
   use 'davidgranstrom/nvim-markdown-preview'
   use {'dsznajder/vscode-es7-javascript-react-snippets',run = 'yarn install --frozen-lockfile && yarn compile'}
-  use {'hrsh7th/nvim-cmp', requires = {'hrsh7th/cmp-vsnip','hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'hrsh7th/vim-vsnip'}}
+  use {'hrsh7th/nvim-cmp', requires = {'saadparwaiz1/cmp_luasnip','hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'L3MON4D3/LuaSnip'}}
   use 'junegunn/goyo.vim'
+  use 'karb94/neoscroll.nvim'
   use {'kyazdani42/nvim-tree.lua',requires = {'kyazdani42/nvim-web-devicons'}}
   use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}}
+  use 'lfilho/cosco.vim'
   use 'lukas-reineke/indent-blankline.nvim'
   use 'mattn/emmet-vim'
   use 'morhetz/gruvbox'
@@ -25,12 +27,15 @@ return require('packer').startup(function()
   use 'norcalli/nvim-colorizer.lua'
   use {'nvim-telescope/telescope.nvim',  requires = {'nvim-lua/plenary.nvim'}}
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  use {'nvim-treesitter/nvim-treesitter',run = ':TSUpdate'}
   use 'nvim-lualine/lualine.nvim' 
   use 'rafamadriz/friendly-snippets'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-commentary'
   use 'tpope/vim-ragtag'
+  use 'tpope/vim-repeat'
   use 'tpope/vim-surround'
   use 'tweekmonster/startuptime.vim'
   use 'untitled-ai/jupyter_ascending.vim'
+  use 'vimwiki/vimwiki'
 end)

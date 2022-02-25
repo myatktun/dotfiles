@@ -36,6 +36,8 @@ fi
 eval "$(starship init bash)"
 export EDITOR="$(which nvim)"
 
+alias studio='/usr/local/android-studio/bin/studio.sh'
+
 # git setup for config files
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias checkpatch=$HOME/Linux/linux_mainline/scripts/checkpatch.pl

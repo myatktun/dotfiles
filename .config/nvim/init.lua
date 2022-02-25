@@ -13,22 +13,31 @@ vim.o.splitbelow = true
 vim.g.user_emmet_leader_key = '<C-Q>'
 vim.o.timeoutlen = 500
 vim.o.showcmd = true
--- vim.o.showtabline = 2
+vim.o.showtabline = 2
 vim.o.termguicolors = true
 vim.o.hidden = true
+vim.o.signcolumn = "yes:1"
+vim.o.list = true
+vim.o.listchars = 'tab: -,trail:·'
+vim.o.scrolloff = 8
+vim.o.sidescrolloff = 8
 vim.g.nvim_tree_respect_buf_cwd = 1
-vim.cmd([[autocmd BufWinLeave *.* mkview!]])
--- vim.cmd([[autocmd BufWinEnter *.* loadview]])
+vim.o.foldmethod = 'expr'
+vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.cmd([[command! MakeTags !ctags -R .]])
 vim.cmd([[command! Make make %< ]])
 vim.cmd([[command! Gcc !gcc -lm -o %< %]])
+vim.cmd([[command! Gccr !gcc -lm -o %< % && time ./%<]])
+vim.cmd([[command! Gcp !g++ -lm -o %< %]])
+vim.cmd([[command! Gcpr !g++ -lm -o %< % && time ./%<]])
 vim.cmd([[command! CopyBuffPath let @+ = expand('%:p')]])
 vim.cmd([[autocmd BufEnter * silent! lcd %:p:h]])
 vim.cmd([[autocmd CmdLineEnter : set ignorecase nosmartcase]])
 vim.cmd([[autocmd CmdLineLeave : set noignorecase smartcase]])
+vim.cmd([[autocmd FileType javascript,css,c,cpp,json nmap <silent> <leader>; <Plug>(cosco-commaOrSemiColon)]])
 vim.cmd([[autocmd BufEnter * set fo-=o fo-=r fo-=c]])
 vim.cmd([[autocmd FileType kivy setlocal commentstring=#\ %s]])
-vim.cmd([[autocmd BufRead,BufNewFile *.c setlocal shiftwidth=8 tabstop=8 softtabstop=8 cc=81 cindent noet]])
+vim.cmd([[autocmd BufRead,BufNewFile *.c,*.cpp setlocal shiftwidth=8 tabstop=8 softtabstop=8 cc=81 cindent noet]])
 
 ---------------------------- Keybinds ---------------------------------------------------------
 
@@ -51,11 +60,8 @@ vim.api.nvim_set_keymap('n', '<F12>', ':!google-chrome %<CR>', options)
 -- switch buffers
 vim.api.nvim_set_keymap('n', '<leader>l', ':BufferLineCycleNext<CR>', options)
 vim.api.nvim_set_keymap('n', '<leader>h', ':BufferLineCyclePrev<CR>', options)
-vim.api.nvim_set_keymap('n', '1<leader>', '<Cmd>BufferLineGoToBuffer 1<CR>', options)
-vim.api.nvim_set_keymap('n', '2<leader>', '<Cmd>BufferLineGoToBuffer 2<CR>', options)
-vim.api.nvim_set_keymap('n', '3<leader>', '<Cmd>BufferLineGoToBuffer 3<CR>', options)
-vim.api.nvim_set_keymap('n', '4<leader>', '<Cmd>BufferLineGoToBuffer 4<CR>', options)
-vim.api.nvim_set_keymap('n', '5<leader>', '<Cmd>BufferLineGoToBuffer 5<CR>', options)
+vim.api.nvim_set_keymap('n', '<C-s>', '<C-^>', options)
+vim.api.nvim_set_keymap('n', '<leader>bs', ':ls<CR>:b<Space>', options)
 
 -- move buffers
 vim.api.nvim_set_keymap('n', '<leader>bml', ':BufferLineMoveNext<CR>', options)
@@ -76,9 +82,14 @@ vim.api.nvim_set_keymap('n', '<leader>bd', ':%bd|e#|bd#<CR>', options)
 -- remove highlights after search
 vim.api.nvim_set_keymap('n', '<leader>/', ':noh<CR>', options)
 
+-- yank all & copy all
+vim.api.nvim_set_keymap('n', '<leader>ya', 'ggVGy', options)
+vim.api.nvim_set_keymap('n', '<leader>aa', 'ggVG"+y', options)
+
 ----load scheme
 vim.api.nvim_set_keymap('n', ';html', ':-1read $HOME/.config/nvim/.skeleton.html<CR>7jwf>a', options)
-vim.api.nvim_set_keymap('n', ';ct', ':-1read $HOME/.config/nvim/.skeleton.c<CR>3jo', options)
+vim.api.nvim_set_keymap('n', ';ct', ':-1read $HOME/.config/nvim/.skeleton.c<CR>4jo', options)
+vim.api.nvim_set_keymap('n', ';cpt', ':-1read $HOME/.config/nvim/.skeleton.cpp<CR>5jo', options)
 
 ----Nvimtree
 vim.api.nvim_set_keymap('n', '<C-n>', ':NvimTreeFindFileToggle<CR>', options)
@@ -94,6 +105,9 @@ vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', options)
 vim.api.nvim_set_keymap('v', '<', '<gv', options)
 vim.api.nvim_set_keymap('v', '>', '>gv', options)
 
+----indent whole file
+vim.api.nvim_set_keymap('n', '<leader>f', 'gg=G<C-o>', options)
+
 ----autoclose brackets
 vim.api.nvim_set_keymap('i', '(', '()<Left>', options)
 vim.api.nvim_set_keymap('i', '(<CR>', '(<CR>)<Esc>ko', options)
@@ -104,8 +118,6 @@ vim.api.nvim_set_keymap('i', '{<CR>', '{<CR>}<Esc>ko', options)
 vim.api.nvim_set_keymap('i', '\'', '\'\'<Left>', options)
 vim.api.nvim_set_keymap('i', '\"', '\"\"<Left>', options)
 
-----indent whole file
-vim.api.nvim_set_keymap('n', '<leader>f', 'gg=G<C-o>', options)
 
 ----open telescope
 vim.api.nvim_set_keymap('n', '<leader>tf', '<Cmd>lua require(\'telescope.builtin\').find_files()<CR>', options)
@@ -130,3 +142,6 @@ require('gitsigns').setup()
 require('colorizer').setup()
 require('telescope').load_extension('fzf')
 require('telescope').setup({defaults = {sorting_strategy = "ascending"}})
+require('neoscroll').setup()
+require("luasnip.loaders.from_vscode").load()
+require('treeSitter')

@@ -2,7 +2,12 @@
 
 check_path() {
   if [[ ! -z $1 && $1 != linux && $1 != "." ]]; then # determine path first
-    path=$(find ~/Projects -type d -iname "$1*" | head -1)
+    if [[ $1 == *"/"* ]]; then
+      arrDir=(${1//// })
+      path=$(find ~/Projects -type d -iname "*${arrDir[1]}*" | head -1)
+    else
+      path=$(find ~/Projects -type d -iname "*$1*" | head -1)
+    fi
   elif [[ $1 == linux ]]; then
     path=~/Linux
   else
@@ -42,8 +47,9 @@ ts() {
 }
 
 Functions() {
-  for function in "$@"; do
-      $function 2>> /tmp/ide.log
+  for function in $@; do
+    # $function 2>> /tmp/ide.log
+    $function
   done
 }
 
@@ -53,7 +59,9 @@ main() {
     tmux new -s ide -c $path -d
     tmux split-window -t ide -c $path -v -p 25
     if [[ $# -ge 1 ]]; then
-      Functions "$@"
+      args=$@
+      sep=`echo $@ | grep -bo "-" | cut -d: -f1`
+      Functions "${args:$sep+1}"
     fi
     tmux send-keys -t ide:1.1 nvim\ . Enter
     tmux select-pane -t ide:1.1
