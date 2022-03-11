@@ -4,7 +4,7 @@ check_path() {
   if [[ ! -z $1 && $1 != linux && $1 != "." ]]; then # determine path first
     if [[ $1 == *"/"* ]]; then
       arrDir=(${1//// })
-      path=$(find ~/Projects -type d -iname "*${arrDir[1]}*" | head -1)
+      path=$(find ~/Projects/"${arrDir[0]^}" -type d -iname "*${arrDir[1]}*" | head -1)
     else
       path=$(find ~/Projects -type d -iname "*$1*" | head -1)
     fi
@@ -39,16 +39,16 @@ exp() {
   # tmux send-keys -t ide:1.2 yarn\ android Enter
 }
 
-ts() {
+yarn() {
   tmux new-window -t ide -c $path
-  tmux send-keys -t ide:2 yarn\ watch Enter
+  # tmux send-keys -t ide:2 yarn\ start Enter
+  # tmux send-keys -t ide:2 yarn\ watch Enter
   tmux select-window -t ide:1
-  tmux send-keys -t ide:1.2 yarn\ dev Enter
+  # tmux send-keys -t ide:1.2 yarn\ dev Enter
 }
 
 Functions() {
   for function in $@; do
-    # $function 2>> /tmp/ide.log
     $function
   done
 }
@@ -57,8 +57,8 @@ main() {
   if ! tmux has-session -t ide; then # create new tmux session if not exist
     check_path $1
     tmux new -s ide -c $path -d
-    tmux split-window -t ide -c $path -v -p 25
-    if [[ $# -ge 1 ]]; then
+    tmux split-window -t ide -c $path -v -p 20
+    if [[ $# -gt 1 ]]; then
       args=$@
       sep=`echo $@ | grep -bo "-" | cut -d: -f1`
       Functions "${args:$sep+1}"

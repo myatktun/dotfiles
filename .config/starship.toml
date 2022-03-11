@@ -16,14 +16,14 @@ style = "bold #8ec07c"
 truncation_symbol = ""
 
 [git_branch]
-format = " on [$symbol$branch]($style) "
+format = "on [$symbol$branch]($style)"
 symbol = " "
 style = "bold #b16286"
 
 [git_commit]
 commit_hash_length = 8
 only_detached = true
-format = "[\\($hash$tag\\)]($style) "
+format = "[\\($hash$tag\\)]($style)"
 style = "bold white"
 disabled = false
 
@@ -42,7 +42,7 @@ behind = "[ﰬ${count}]($style)"
 diverged = "[ﰵ${ahead_count}ﰬ${behind_count}]($style)"
 stashed = "📦 "
 style = "#ebdbb2"
-format = '([ \[$all_status$ahead_behind\]]($style))'
+format = '([ \[$all_status$ahead_behind\]]($style)) '
 
 [hostname]
 ssh_only = false

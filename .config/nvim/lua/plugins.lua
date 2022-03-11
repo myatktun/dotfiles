@@ -1,4 +1,4 @@
-local fn = vim.fn
+-- local fn = vim.fn
 
 --local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 --[[
@@ -10,10 +10,13 @@ end
 return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
   use "akinsho/bufferline.nvim"
+  use "akinsho/toggleterm.nvim"
+  -- use 'chrisbra/csv.vim'
   use 'christoomey/vim-system-copy'
   use 'christoomey/vim-titlecase'
   use 'davidgranstrom/nvim-markdown-preview'
   use {'dsznajder/vscode-es7-javascript-react-snippets',run = 'yarn install --frozen-lockfile && yarn compile'}
+  use 'ggandor/lightspeed.nvim'
   use {'hrsh7th/nvim-cmp', requires = {'saadparwaiz1/cmp_luasnip','hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'L3MON4D3/LuaSnip'}}
   use 'junegunn/goyo.vim'
   use 'karb94/neoscroll.nvim'
@@ -28,7 +31,7 @@ return require('packer').startup(function()
   use {'nvim-telescope/telescope.nvim',  requires = {'nvim-lua/plenary.nvim'}}
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use {'nvim-treesitter/nvim-treesitter',run = ':TSUpdate'}
-  use 'nvim-lualine/lualine.nvim' 
+  use 'nvim-lualine/lualine.nvim'
   use 'rafamadriz/friendly-snippets'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-commentary'

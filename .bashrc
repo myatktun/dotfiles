@@ -27,19 +27,17 @@ export PATH
 # Light Gray  0;37     White         1;37
 
 # auto start tmux
-if [[ ! $TERM =~ screen ]]; then
-  ## load tmux with script
-  # tmux attach ||exec ide
+if [[ ! $TERM =~ screen ]] && [[ ! $TERM =~ tmux ]] && [ -z "$TMUX" ]; then
   tmux attach || tmux new
 fi
 
 eval "$(starship init bash)"
 export EDITOR="$(which nvim)"
 
-alias studio='/usr/local/android-studio/bin/studio.sh'
+alias studio="/usr/local/android-studio/bin/studio.sh"
 
 # git setup for config files
-alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias checkpatch=$HOME/Linux/linux_mainline/scripts/checkpatch.pl
 alias get_maintainer=$HOME/Linux/linux_mainline/scripts/get_maintainer.pl
 alias update-grub='sudo grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg'
@@ -49,9 +47,9 @@ export PATH=$PATH:$HOME/.yarn/bin
 
 # android/sdk path
 export ANDROID_SDK_ROOT=$HOME/Android/Sdk
-export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
-export PATH=$PATH:$ANDROID_SDK_ROOT/tools
-export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+export PATH="$PATH:$ANDROID_SDK_ROOT/emulator"
+export PATH="$PATH:$ANDROID_SDK_ROOT/tools"
+export PATH="$PATH:$ANDROID_SDK_ROOT/platform-tools"
 
 # perl path
 PATH="/home/stew/perl5/bin${PATH:+:${PATH}}"; export PATH;
@@ -61,8 +59,8 @@ PERL_MB_OPT="--install_base \"/home/stew/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/stew/perl5"; export PERL_MM_OPT;
 
 # go path
-export GOPATH=$HOME/.go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export GOPATH="$HOME/.go"
+export PATH="$PATH:$GOROOT/bin:$GOPATH/bin"
 
 # pyenv path
 export PYENV_ROOT="$HOME/.pyenv"
@@ -70,6 +68,8 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 # eval "$(pyenv virtualenv-init -)"
+
+# export PATH=$PATH:$HOME/.cargo/env
 
 # to display git status
 # source ~/.git-prompt.sh
@@ -104,3 +104,4 @@ fi
 
 unset rc
 
+# . "$HOME/.cargo/env"
