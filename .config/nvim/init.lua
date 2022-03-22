@@ -30,6 +30,7 @@ vim.g.vimwiki_list = { {} }
 vim.g.vimwiki_list = { { path = "~/Documents/Vimwiki" , syntax = "markdown", ext = "md"} }
 vim.cmd([[command! MakeTags !ctags -R .]])
 vim.cmd([[command! Make make %< ]])
+vim.cmd([[command! Node !node % ]])
 vim.cmd([[command! Gcc !gcc -lm -o %< %]])
 vim.cmd([[command! Gccr !gcc -lm -o %< % && time ./%<]])
 vim.cmd([[command! Gcp !g++ -lm -o %< %]])
@@ -63,6 +64,9 @@ vim.api.nvim_set_keymap("t", "jj", "<C-\\><C-n>", options)
 ---- ToggleTerm
 vim.api.nvim_set_keymap("n", "<leader>tt", ":ToggleTerm size=10<CR>", options)
 
+---- Toggle SymbolsOutline
+vim.api.nvim_set_keymap("n", "<F8>", ":SymbolsOutline<CR>", options)
+
 ---- Change directory
 vim.api.nvim_set_keymap("n", "<leader>ch", ":cd ~/", options)
 vim.api.nvim_set_keymap("n", "<leader>cc", ":cd ", options)
@@ -71,10 +75,11 @@ vim.api.nvim_set_keymap("n", "<leader>cc", ":cd ", options)
 vim.api.nvim_set_keymap("n", "<F12>", ":!google-chrome %<CR>", options)
 
 ---- Switch buffers
-vim.api.nvim_set_keymap("n", "<leader>l", ":BufferLineCycleNext<CR>", options)
-vim.api.nvim_set_keymap("n", "<leader>h", ":BufferLineCyclePrev<CR>", options)
+vim.api.nvim_set_keymap("n", "<leader>l", ":bn<CR>", options)
+vim.api.nvim_set_keymap("n", "<leader>h", ":bp<CR>", options)
 vim.api.nvim_set_keymap("n", "<C-s>", "<C-^>", options)
-vim.api.nvim_set_keymap("n", "<leader>bs", ":ls<CR>:b<Space>", options)
+-- vim.api.nvim_set_keymap("n", "<leader>bs", ":ls<CR>:b<Space>", options)
+vim.api.nvim_set_keymap("n", "<leader>bs", ":ReachOpen buffers<CR>", options)
 
 ---- Move buffers
 vim.api.nvim_set_keymap("n", "<leader>bml", ":BufferLineMoveNext<CR>", options)
@@ -159,3 +164,4 @@ require("luasnip.loaders.from_vscode").load()
 require("treeSitter")
 require("lightSpeed")
 require("toggleterm").setup()
+require("reach").setup()

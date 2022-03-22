@@ -54,9 +54,10 @@ disabled = true
 [package]
 disabled = true
 
-[python]
-format = " [$symbol$version]($style) "
-style = "bold green"
+# [python]
+# format = " [$symbol$version]($style) "
+# style = "bold green"
+# disabled = true
 
 [username]
 style_user = "bold dimmed blue"

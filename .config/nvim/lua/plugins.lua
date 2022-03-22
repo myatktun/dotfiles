@@ -33,6 +33,8 @@ return require('packer').startup(function()
   use {'nvim-treesitter/nvim-treesitter',run = ':TSUpdate'}
   use 'nvim-lualine/lualine.nvim'
   use 'rafamadriz/friendly-snippets'
+  use 'simrat39/symbols-outline.nvim'
+  use 'toppair/reach.nvim'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-commentary'
   use 'tpope/vim-ragtag'
