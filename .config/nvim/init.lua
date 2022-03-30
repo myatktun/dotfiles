@@ -45,6 +45,7 @@ vim.cmd([[autocmd BufEnter * set fo-=o fo-=r fo-=c]])
 -- vim.cmd([[autocmd BufWinEnter * normal zR]])
 vim.cmd([[autocmd FileType kivy setlocal commentstring=#\ %s]])
 vim.cmd( [[autocmd BufRead,BufNewFile *.c,*.cpp setlocal shiftwidth=8 tabstop=8 softtabstop=8 cc=81 cindent noet]])
+vim.cmd( [[autocmd BufRead,BufNewFile *.md setlocal cc=95]])
 
 ---------------------------- Keybinds ---------------------------------------------------------
 
