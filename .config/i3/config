@@ -3,7 +3,7 @@
 exec_always --no-startup-id xrandr --output eDP-1 --off --output HDMI-1 --primary --mode 1920x1080 --refresh 120.40 --pos 0x0 --rotate normal
 
 # load wallpaper
-exec_always --no-startup-id feh --bg-fill /home/stew/Pictures/3.png
+exec_always --no-startup-id feh --bg-fill ~/Pictures/solid-color-282828.png
 exec_always --no-startup-id xinput --set-prop 25 'libinput Accel Profile Enabled' 0, 1
 exec_always --no-startup-id xinput --set-prop 16 'libinput Accel Profile Enabled' 0, 1
 exec_always --no-startup-id setxkbmap $(cat ~/.config/i3status/KBlayout.log)
@@ -151,6 +151,9 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+Control+e exec i3-msg exit
 
+# poweroff system
+bindsym $mod+Shift+Control+p exec poweroff
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
   bindsym h resize shrink width 5 px or 5 ppt
@@ -171,13 +174,13 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # set window style border and name
-for_window [class=".*"] border pixel 2
+for_window [class=".*"] border pixel 1
 
-set $bgcolor        #1d2021
+set $bgcolor        #282828
 set $border         #fbf1c7
 set $text           #ebdbb2
 set $urgent         #cc241d
-set $unfocus        #1d2021
+set $unfocus        #282828
 
 # gaps and borders colors
 # Property Name          Border   BG       Text     Indicator 
@@ -199,12 +202,12 @@ bar {
     separator_symbol " | "
     status_command i3status --config ~/.config/i3status/i3status.conf
     colors {
-      background #1d2021
-        statusline #ebdbb2
+      background $bgcolor
+        statusline $text
 # separator  #fabd2f
-#                  border     background   text
-        focused_workspace  #1d2021    #1d2021      #8ec07c
-        inactive_workspace #1d2021    #1d2021      #7c6f64
-        urgent_workspace   #1d2021    #1d2021      $urgent
+        #                  border     background   text
+        focused_workspace  $bgcolor    $bgcolor    #8ec07c
+        inactive_workspace $bgcolor    $bgcolor    #7c6f64
+        urgent_workspace   $bgcolor    $bgcolor    $urgent
     }
 }

@@ -31,32 +31,35 @@ if [[ ! $TERM =~ screen ]] && [[ ! $TERM =~ tmux ]] && [ -z "$TMUX" ]; then
   tmux attach || tmux new
 fi
 
+# auto start starship
 eval "$(starship init bash)"
-export EDITOR="$(which nvim)"
 
-alias studio="/usr/local/android-studio/bin/studio.sh"
+export EDITOR="$(which nvim)"
 
 # git setup for config files
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
-alias checkpatch=$HOME/Linux/linux_mainline/scripts/checkpatch.pl
-alias get_maintainer=$HOME/Linux/linux_mainline/scripts/get_maintainer.pl
-alias update-grub='sudo grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg'
+
+alias checkpatch="$HOME/Linux/linux_mainline/scripts/checkpatch.pl"
+alias get_maintainer="$HOME/Linux/linux_mainline/scripts/get_maintainer.pl"
+
+alias update-grub="grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg"
 
 # yarn path
-export PATH=$PATH:$HOME/.yarn/bin
+export PATH="$PATH:$HOME/.yarn/bin"
 
 # android/sdk path
-export ANDROID_SDK_ROOT=$HOME/Android/Sdk
+export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
 export PATH="$PATH:$ANDROID_SDK_ROOT/emulator"
 export PATH="$PATH:$ANDROID_SDK_ROOT/tools"
 export PATH="$PATH:$ANDROID_SDK_ROOT/platform-tools"
+alias studio="/usr/local/android-studio/bin/studio.sh"
 
 # perl path
-PATH="/home/stew/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/stew/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/stew/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/stew/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/stew/perl5"; export PERL_MM_OPT;
+PATH="$HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
 
 # go path
 export GOPATH="$HOME/.go"
@@ -67,9 +70,10 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
-# eval "$(pyenv virtualenv-init -)"
+eval "$(pyenv virtualenv-init -)"
 
-# export PATH=$PATH:$HOME/.cargo/env
+# cargo path (rust pkp manager)
+export PATH=$PATH:$HOME/.cargo/env
 
 # to display git status
 # source ~/.git-prompt.sh
@@ -103,5 +107,3 @@ if [ -d ~/.bashrc.d ]; then
 fi
 
 unset rc
-
-# . "$HOME/.cargo/env"

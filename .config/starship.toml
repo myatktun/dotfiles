@@ -37,9 +37,9 @@ renamed = "[${count}]($style)"
 untracked = "[${count}](#458588)"
 deleted = "[${count}](#cc241d)"
 conflicted = "[≠](red)"
-ahead = "[ﰵ${count}]($style)"
-behind = "[ﰬ${count}]($style)"
-diverged = "[ﰵ${ahead_count}ﰬ${behind_count}]($style)"
+ahead = "[${count}]($style)"
+behind = "[${count}]($style)"
+diverged = "[${ahead_count}${behind_count}]($style)"
 stashed = "📦 "
 style = "#ebdbb2"
 format = '([ \[$all_status$ahead_behind\]]($style)) '
@@ -54,10 +54,25 @@ disabled = true
 [package]
 disabled = true
 
-# [python]
+[python]
 # format = " [$symbol$version]($style) "
 # style = "bold green"
-# disabled = true
+disabled = true
+
+[nodejs]
+disabled = true
+
+[golang]
+disabled = true
+
+[java]
+disabled = true
+
+[vagrant]
+disabled = true
+
+[perl]
+disabled = true
 
 [username]
 style_user = "bold dimmed blue"

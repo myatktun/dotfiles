@@ -66,7 +66,7 @@ require'lspconfig'.sumneko_lua.setup {
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'clangd','bashls', 'html','cssls','pyright', 'rust_analyzer', 'tsserver' }
+local servers = { 'clangd','bashls', 'dockerls', 'html','cssls','pyright', 'rust_analyzer', 'tsserver' }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     root_dir = util.root_pattern(".git", "package.json", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt"),

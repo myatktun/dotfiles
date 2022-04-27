@@ -26,8 +26,8 @@ vim.o.wrap = false
 vim.g.nvim_tree_respect_buf_cwd = 1
 vim.g.user_emmet_leader_key = "<C-Q>"
 vim.g.vimwiki_list = { {} }
--- vim.g.vimwiki_list = { { path = "~/Documents/Vimwiki" , syntax = "markdown", ext = "md", path_html = "~/.local/share/nvim/site/pack/packer/start/vimwiki/autoload/vimwiki/default.tpl", custom_wiki2html = "~/.local/share/nvim/site/pack/packer/start/vimwiki/autoload/vimwiki/custom_wiki2html.sh"} }
 vim.g.vimwiki_list = { { path = "~/Documents/Vimwiki" , syntax = "markdown", ext = "md"} }
+vim.g.nvim_markdown_preview_theme = "solarized-dark"
 vim.cmd([[command! MakeTags !ctags -R .]])
 vim.cmd([[command! Make make %< ]])
 vim.cmd([[command! Node !node % ]])
@@ -38,12 +38,15 @@ vim.cmd([[command! Gcpr !g++ -lm -o %< % && time ./%<]])
 vim.cmd([[command! CopyBuffPath let @+ = expand('%:p')]])
 vim.cmd([[command! Source source ~/.config/nvim/init.lua]])
 vim.cmd([[autocmd BufEnter * silent! lcd %:p:h]])
+vim.cmd([[autocmd BufEnter * silent! set laststatus=3]])
 vim.cmd([[autocmd CmdLineEnter : set ignorecase nosmartcase]])
 vim.cmd([[autocmd CmdLineEnter : set ignorecase nosmartcase]])
 vim.cmd([[autocmd FileType javascript,css,c,cpp,json nmap <silent> <leader>; <Plug>(cosco-commaOrSemiColon)]])
 vim.cmd([[autocmd BufEnter * set fo-=o fo-=r fo-=c]])
 -- vim.cmd([[autocmd BufWinEnter * normal zR]])
+vim.cmd([[autocmd BufRead,BufNewFile Jenkinsfile setf groovy]])
 vim.cmd([[autocmd FileType kivy setlocal commentstring=#\ %s]])
+vim.cmd([[autocmd FileType gitcommit setlocal cc=72]])
 vim.cmd( [[autocmd BufRead,BufNewFile *.c,*.cpp setlocal shiftwidth=8 tabstop=8 softtabstop=8 cc=81 cindent noet]])
 vim.cmd( [[autocmd BufRead,BufNewFile *.md setlocal cc=95]])
 
@@ -79,8 +82,7 @@ vim.api.nvim_set_keymap("n", "<F12>", ":!google-chrome %<CR>", options)
 vim.api.nvim_set_keymap("n", "<leader>l", ":bn<CR>", options)
 vim.api.nvim_set_keymap("n", "<leader>h", ":bp<CR>", options)
 vim.api.nvim_set_keymap("n", "<C-s>", "<C-^>", options)
--- vim.api.nvim_set_keymap("n", "<leader>bs", ":ls<CR>:b<Space>", options)
-vim.api.nvim_set_keymap("n", "<leader>bs", ":ReachOpen buffers<CR>", options)
+vim.api.nvim_set_keymap("n", "<leader>bs", "<Cmd>lua require('reach').buffers({handle='bufnr'})<CR>", options)
 
 ---- Move buffers
 vim.api.nvim_set_keymap("n", "<leader>bml", ":BufferLineMoveNext<CR>", options)
@@ -165,4 +167,3 @@ require("luasnip.loaders.from_vscode").load()
 require("treeSitter")
 require("lightSpeed")
 require("toggleterm").setup()
-require("reach").setup()
