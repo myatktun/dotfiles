@@ -6,7 +6,7 @@ check_path() {
       arrDir=(${1//// })
       path=$(find ~/Projects/"${arrDir[0]^}" -maxdepth 1 -type d -iname "*${arrDir[1]}*" | head -1)
     else
-      path=$(find ~/Projects -type d -iname "*$1*" | head -1)
+      path=$(find ~/Projects -type d -iname "$1" | head -1)
     fi
   elif [[ $1 == linux ]]; then
     path=~/Linux

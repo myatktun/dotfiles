@@ -12,7 +12,7 @@ exec_always --no-startup-id setxkbmap $(cat ~/.config/i3status/KBlayout.log)
 set $mod Mod4
 
 # font
-font pango:FuraCode NF 0
+font pango:FiraCode NF 0
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -177,6 +177,9 @@ bindsym $mod+r mode "resize"
 for_window [class=".*"] border pixel 1
 
 set $bgcolor        #282828
+set $focused        #d79921
+# set $focused        #8ec07c
+set $inactive       #7c6f64
 set $border         #fbf1c7
 set $text           #ebdbb2
 set $urgent         #cc241d
@@ -196,6 +199,7 @@ gaps inner 4
 gaps outer 7
 gaps top 0
 
+# exec_always --no-startup-id ~/.config/polybar/launch.sh
 bar {
   font pango:DejaVu Sans Mono, Font Awesome 6 Free Regular 11
     position top
@@ -203,11 +207,11 @@ bar {
     status_command i3status --config ~/.config/i3status/i3status.conf
     colors {
       background $bgcolor
-        statusline $text
+      statusline $text
 # separator  #fabd2f
         #                  border     background   text
-        focused_workspace  $bgcolor    $bgcolor    #8ec07c
-        inactive_workspace $bgcolor    $bgcolor    #7c6f64
+        focused_workspace  $bgcolor    $bgcolor    $focused
+        inactive_workspace $bgcolor    $bgcolor    $inactive
         urgent_workspace   $bgcolor    $bgcolor    $urgent
     }
 }

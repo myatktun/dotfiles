@@ -1,2 +1,9 @@
-@theme "~/.config/rofi/themes/gruvbox-dark.rasi"
-/* @theme "~/.config/rofi/themes/nord.rasi" */
+/** Basic config file **/
+
+
+configuration {
+  show-icons:         true;
+  icon-theme:         "Papirus";
+}
+@theme "~/.config/rofi/themes/gruvbox_window.rasi"
+
