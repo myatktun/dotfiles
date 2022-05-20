@@ -1,6 +1,7 @@
-# load monitor settings
+############################################### default commands & settings ###############################################
 
-exec_always --no-startup-id xrandr --output eDP-1 --off --output HDMI-1 --primary --mode 1920x1080 --refresh 120.40 --pos 0x0 --rotate normal
+# load monitor settings
+exec_always --no-startup-id ~/.config/i3/display.sh
 
 # load wallpaper
 exec_always --no-startup-id feh --bg-fill ~/Pictures/solid-color-282828.png
@@ -8,11 +9,82 @@ exec_always --no-startup-id xinput --set-prop 25 'libinput Accel Profile Enabled
 exec_always --no-startup-id xinput --set-prop 16 'libinput Accel Profile Enabled' 0, 1
 exec_always --no-startup-id setxkbmap $(cat ~/.config/i3status/KBlayout.log)
 
-# set mod
-set $mod Mod4
-
 # font
 font pango:FiraCode NF 0
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# workspaces
+set $workspace1 ""
+set $workspace2 ""
+set $workspace3 ""
+set $workspace4 ""
+set $workspace5 ""
+set $workspace6 ""
+set $workspace7 ""
+set $workspace8 ""
+set $workspace9 ""
+set $workspace0 ""
+
+# assign default workspaces
+assign [class="Steam"] $workspace3
+assign [class="discord"] $workspace4
+assign [class="dota2"] $workspace5
+assign [class="csgo_linux64"] $workspace5
+assign [class="Zathura"] $workspace6
+for_window [class="Zathura"] fullscreen enable
+for_window [title="Android Emulator - *PIXEL*"] resize set 560px 1036px
+assign [class="VirtualBox Manager"] $workspace8
+assign [class="jetbrains-studio"] $workspace9
+
+# set window style border and name
+for_window [class=".*"] border pixel 1
+
+# set colors
+set $bgcolor        #282828
+set $focused        #d79921
+# set $focused        #8ec07c
+set $inactive       #7c6f64
+set $border         #fbf1c7
+set $text           #ebdbb2
+set $urgent         #cc241d
+set $unfocus        #282828
+
+# gaps and borders colors
+# Property Name          Border   BG       Text     Indicator 
+client.focused           $border  $border  $text    $border
+client.focused_inactive  $unfocus $unfocus $text    $unfocus
+client.unfocused         $unfocus $unfocus $text    $unfocus
+client.placeholder       $unfocus $unfocus $text    $unfocus
+client.urgent            $urgent  $urgent  $text    $urgent
+client.background        $unfocus
+
+# gaps and borders
+gaps inner 4
+gaps outer 7
+gaps top 0
+
+bar {
+  font pango:DejaVu Sans Mono, Font Awesome 6 Free Regular 11
+    position top
+    separator_symbol " | "
+    status_command i3status --config ~/.config/i3status/i3status.conf
+    colors {
+      background $bgcolor
+      statusline $text
+      # separator  #fabd2f
+        #                  border     background   text
+        focused_workspace  $bgcolor    $bgcolor    $focused
+        inactive_workspace $bgcolor    $bgcolor    $inactive
+        urgent_workspace   $bgcolor    $bgcolor    $urgent
+    }
+}
+
+############################################### keybinds ###############################################
+
+# set mod
+set $mod Mod4
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -20,9 +92,6 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
 
 # open a terminal
 bindsym $mod+Return workspace $workspace1; exec kitty
@@ -40,8 +109,8 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id rofi -show drun
 
 # change keyboard layout
-bindsym $mod+Control+1 exec --no-startup-id setxkbmap us && setxkbmap -query | awk '/layout/{print $2}' > ~/.config/i3status/KBlayout.log
-bindsym $mod+Control+2 exec --no-startup-id setxkbmap dvorak && setxkbmap -query | awk '/layout/{print $2}' > ~/.config/i3status/KBlayout.log
+bindsym $mod+Control+1 exec --no-startup-id setxkbmap us && setxkbmap -query | awk '/layout/{print $2}' > ~/.config/i3status/KBlayout.log && $refresh_i3status
+bindsym $mod+Control+2 exec --no-startup-id setxkbmap dvorak && setxkbmap -query | awk '/layout/{print $2}' > ~/.config/i3status/KBlayout.log && $refresh_i3status
 
 # open zathura
 # bindsym $mod+z exec --no-startup-id zathura "$(cat ~/.local/share/zathura/history | grep -Po "\[\K[^\]]*" | tail -1)" 
@@ -97,17 +166,6 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-set $workspace1 ""
-set $workspace2 ""
-set $workspace3 ""
-set $workspace4 ""
-set $workspace5 ""
-set $workspace6 ""
-set $ws7 "7"
-set $workspace8 ""
-set $workspace9 ""
-set $workspace0 ""
-
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
 bindsym $mod+2 workspace $workspace2
@@ -115,7 +173,7 @@ bindsym $mod+3 workspace $workspace3
 bindsym $mod+4 workspace $workspace4
 bindsym $mod+5 workspace $workspace5
 bindsym $mod+6 workspace $workspace6
-bindsym $mod+7 workspace number $ws7
+bindsym $mod+7 workspace $workspace7
 bindsym $mod+8 workspace $workspace8
 bindsym $mod+9 workspace $workspace9
 bindsym $mod+0 workspace $workspace0
@@ -127,20 +185,10 @@ bindsym $mod+Shift+3 move container to workspace $workspace3
 bindsym $mod+Shift+4 move container to workspace $workspace4
 bindsym $mod+Shift+5 move container to workspace $workspace5
 bindsym $mod+Shift+6 move container to workspace $workspace6
-bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+7 move container to workspace $workspace7
 bindsym $mod+Shift+8 move container to workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace0
-
-assign [class="Steam"] $workspace3
-assign [class="discord"] $workspace4
-assign [class="dota2"] $workspace5
-assign [class="csgo_linux64"] $workspace5
-assign [class="Zathura"] $workspace6
-for_window [class="Zathura"] fullscreen enable
-for_window [title="Android Emulator - *PIXEL*"] resize set 560px 1036px
-assign [class="VirtualBox Manager"] $workspace8
-assign [class="jetbrains-studio"] $workspace9
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -170,48 +218,4 @@ mode "resize" {
     bindsym Escape mode "default"
     bindsym $mod+r mode "default"
 }
-
 bindsym $mod+r mode "resize"
-
-# set window style border and name
-for_window [class=".*"] border pixel 1
-
-set $bgcolor        #282828
-set $focused        #d79921
-# set $focused        #8ec07c
-set $inactive       #7c6f64
-set $border         #fbf1c7
-set $text           #ebdbb2
-set $urgent         #cc241d
-set $unfocus        #282828
-
-# gaps and borders colors
-# Property Name          Border   BG       Text     Indicator 
-client.focused           $border  $border  $text    $border
-client.focused_inactive  $unfocus $unfocus $text    $unfocus
-client.unfocused         $unfocus $unfocus $text    $unfocus
-client.placeholder       $unfocus $unfocus $text    $unfocus
-client.urgent            $urgent  $urgent  $text    $urgent
-client.background        $unfocus
-
-# gaps and borders
-gaps inner 4
-gaps outer 7
-gaps top 0
-
-# exec_always --no-startup-id ~/.config/polybar/launch.sh
-bar {
-  font pango:DejaVu Sans Mono, Font Awesome 6 Free Regular 11
-    position top
-    separator_symbol " | "
-    status_command i3status --config ~/.config/i3status/i3status.conf
-    colors {
-      background $bgcolor
-      statusline $text
-# separator  #fabd2f
-        #                  border     background   text
-        focused_workspace  $bgcolor    $bgcolor    $focused
-        inactive_workspace $bgcolor    $bgcolor    $inactive
-        urgent_workspace   $bgcolor    $bgcolor    $urgent
-    }
-}
