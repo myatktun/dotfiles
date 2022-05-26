@@ -74,6 +74,9 @@ disabled = true
 [perl]
 disabled = true
 
+[lua]
+disabled = true
+
 [username]
 style_user = "bold dimmed blue"
 show_always = false

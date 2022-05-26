@@ -66,7 +66,7 @@ gaps outer 7
 gaps top 0
 
 bar {
-  font pango:DejaVu Sans Mono, Font Awesome 6 Free Regular 11
+  font pango:DejaVu Sans Mono, Font Awesome 6 Brands Regular, Font Awesome 6 Free Solid 11
     position top
     separator_symbol " | "
     status_command i3status --config ~/.config/i3status/i3status.conf

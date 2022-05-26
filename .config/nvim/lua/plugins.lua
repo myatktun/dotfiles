@@ -1,6 +1,6 @@
 -- local fn = vim.fn
 
---local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+-- local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 --[[
 if fn.empty(fn.glob(install_path)) > 0 then
 packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
@@ -31,16 +31,18 @@ return require('packer').startup(function()
   use {'nvim-telescope/telescope.nvim',  requires = {'nvim-lua/plenary.nvim'}}
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use {'nvim-treesitter/nvim-treesitter',run = ':TSUpdate'}
+  use 'numToStr/Comment.nvim'
   use 'nvim-lualine/lualine.nvim'
   use 'rafamadriz/friendly-snippets'
   use 'simrat39/symbols-outline.nvim'
   use 'toppair/reach.nvim'
   use 'tpope/vim-fugitive'
-  use 'tpope/vim-commentary'
+  -- use 'tpope/vim-commentary'
   use 'tpope/vim-ragtag'
   use 'tpope/vim-repeat'
   use 'tpope/vim-surround'
   use 'tweekmonster/startuptime.vim'
   use 'untitled-ai/jupyter_ascending.vim'
   use 'vimwiki/vimwiki'
+  use 'windwp/nvim-autopairs'
 end)

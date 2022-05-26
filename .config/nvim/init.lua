@@ -38,12 +38,9 @@ vim.cmd([[command! Gcpr !g++ -lm -o %< % && time ./%<]])
 vim.cmd([[command! CopyBuffPath let @+ = expand('%:p')]])
 vim.cmd([[command! Source source ~/.config/nvim/init.lua]])
 vim.cmd([[autocmd BufEnter * silent! lcd %:p:h]])
-vim.cmd([[autocmd BufEnter * silent! set laststatus=3]])
-vim.cmd([[autocmd CmdLineEnter : set ignorecase nosmartcase]])
 vim.cmd([[autocmd CmdLineEnter : set ignorecase nosmartcase]])
 vim.cmd([[autocmd FileType javascript,css,c,cpp,json nmap <silent> <leader>; <Plug>(cosco-commaOrSemiColon)]])
 vim.cmd([[autocmd BufEnter * set fo-=o fo-=r fo-=c]])
--- vim.cmd([[autocmd BufWinEnter * normal zR]])
 vim.cmd([[autocmd BufRead,BufNewFile Jenkinsfile setf groovy]])
 vim.cmd([[autocmd FileType kivy setlocal commentstring=#\ %s]])
 vim.cmd([[autocmd FileType gitcommit setlocal cc=72]])
@@ -52,99 +49,89 @@ vim.cmd( [[autocmd BufRead,BufNewFile *.md setlocal cc=95]])
 
 ---------------------------- Keybinds ---------------------------------------------------------
 
-local options = { noremap = true, silent = true }
+local options = {silent = true }
 
 ---- Leader
-vim.api.nvim_set_keymap("n", "<Space>", "<NOP>", options)
+vim.keymap.set("n", "<Space>", "<NOP>", options)
 vim.g.mapleader = " "
 
 ---- Esc
-vim.api.nvim_set_keymap("i", "jj", "<Esc>", options)
+vim.keymap.set("i", "jj", "<Esc>", options)
 
 ---- Esc in terminal mode
-vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", options)
-vim.api.nvim_set_keymap("t", "jj", "<C-\\><C-n>", options)
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", options)
+vim.keymap.set("t", "jj", "<C-\\><C-n>", options)
 
 ---- ToggleTerm
-vim.api.nvim_set_keymap("n", "<leader>tt", ":ToggleTerm size=10<CR>", options)
+vim.keymap.set("n", "<leader>tt", ":ToggleTerm size=10<CR>", options)
 
 ---- Toggle SymbolsOutline
-vim.api.nvim_set_keymap("n", "<F8>", ":SymbolsOutline<CR>", options)
+vim.keymap.set("n", "<F8>", ":SymbolsOutline<CR>", options)
 
 ---- Change directory
-vim.api.nvim_set_keymap("n", "<leader>ch", ":cd ~/", options)
-vim.api.nvim_set_keymap("n", "<leader>cc", ":cd ", options)
+vim.keymap.set("n", "<leader>ch", ":cd ~/", options)
+vim.keymap.set("n", "<leader>cc", ":cd ", options)
 
 ---- Open current file in chrome
-vim.api.nvim_set_keymap("n", "<F12>", ":!google-chrome %<CR>", options)
+vim.keymap.set("n", "<F12>", ":!google-chrome %<CR>", options)
 
 ---- Switch buffers
-vim.api.nvim_set_keymap("n", "<leader>l", ":bn<CR>", options)
-vim.api.nvim_set_keymap("n", "<leader>h", ":bp<CR>", options)
-vim.api.nvim_set_keymap("n", "<C-s>", "<C-^>", options)
-vim.api.nvim_set_keymap("n", "<leader>bs", "<Cmd>lua require('reach').buffers({handle='bufnr'})<CR>", options)
+vim.keymap.set("n", "L", ":bn<CR>", options)
+vim.keymap.set("n", "H", ":bp<CR>", options)
+vim.keymap.set("n", "<C-s>", "<C-^>", options)
+vim.keymap.set("n", "<leader>bs", "<Cmd>lua require('reach').buffers({handle='bufnr'})<CR>", options)
 
 ---- Move buffers
-vim.api.nvim_set_keymap("n", "<leader>bml", ":BufferLineMoveNext<CR>", options)
-vim.api.nvim_set_keymap("n", "<leader>bmh", ":BufferLineMovePrev<CR>", options)
+vim.keymap.set("n", "<leader>bml", ":BufferLineMoveNext<CR>", options)
+vim.keymap.set("n", "<leader>bmh", ":BufferLineMovePrev<CR>", options)
 
 ---- Move selected lines up or down
-vim.api.nvim_set_keymap("n", "<A-k>", ":m .-2<CR>==", options)
-vim.api.nvim_set_keymap("n", "<A-j>", ":m.+1<CR>==", options)
-vim.api.nvim_set_keymap("v", "<A-k>", ":m-2<CR>gv=gv", options)
-vim.api.nvim_set_keymap("v", "<A-j>", ":m'>+<CR>gv=gv", options)
+vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", options)
+vim.keymap.set("n", "<A-j>", ":m.+1<CR>==", options)
+vim.keymap.set("v", "<A-k>", ":m-2<CR>gv=gv", options)
+vim.keymap.set("v", "<A-j>", ":m'>+<CR>gv=gv", options)
 
 ---- Find & rename word under cursor
-vim.api.nvim_set_keymap("n", "<leader>rn", "* :%s//", options)
+vim.keymap.set("n", "<leader>rn", "* :%s//", options)
 
 ---- Delete all buffers except current
-vim.api.nvim_set_keymap("n", "<leader>bd", ":%bd|e#|bd#<CR>", options)
+vim.keymap.set("n", "<leader>bd", ":%bd|e#|bd#<CR>", options)
 
 ---- Remove highlights after search
-vim.api.nvim_set_keymap("n", "<leader>/", ":noh<CR>", options)
+vim.keymap.set("n", "<leader>/", ":noh<CR>", options)
 
 ---- Yank all & copy all
-vim.api.nvim_set_keymap("n", "<leader>ya", "ggVGy", options)
-vim.api.nvim_set_keymap("n", "<leader>aa", "ggVG\"+y", options)
+vim.keymap.set("n", "<leader>ya", "ggVGy", options)
+vim.keymap.set("n", "<leader>aa", "ggVG\"+y", options)
 
 ---- Load scheme
-vim.api.nvim_set_keymap("n",";html",":-1read $HOME/.config/nvim/.skeleton.html<CR>7jwf>a",options)
-vim.api.nvim_set_keymap("n",";ct",":-1read $HOME/.config/nvim/.skeleton.c<CR>4jo", options)
-vim.api.nvim_set_keymap( "n", ";cpt", ":-1read $HOME/.config/nvim/.skeleton.cpp<CR>5jo", options)
+vim.keymap.set("n",";html",":-1read $HOME/.config/nvim/.skeleton.html<CR>7jwf>a",options)
+vim.keymap.set("n",";ct",":-1read $HOME/.config/nvim/.skeleton.c<CR>4jo", options)
+vim.keymap.set( "n", ";cpt", ":-1read $HOME/.config/nvim/.skeleton.cpp<CR>5jo", options)
 
 ---- Nvimtree
-vim.api.nvim_set_keymap("n", "<C-n>", ":NvimTreeFindFileToggle<CR>", options)
-vim.api.nvim_set_keymap("n", "<leader>n", ":NvimTreeFocus<CR>", options)
+vim.keymap.set("n", "<C-n>", ":NvimTreeFindFileToggle<CR>", options)
+vim.keymap.set("n", "<leader>n", ":NvimTreeFocus<CR>", options)
 
 ---- Better window navigation
-vim.api.nvim_set_keymap("n", "<C-h>", "<C-w>h", options)
-vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", options)
-vim.api.nvim_set_keymap("n", "<C-k>", "<C-w>k", options)
-vim.api.nvim_set_keymap("n", "<C-l>", "<C-w>l", options)
+vim.keymap.set("n", "<C-h>", "<C-w>h", options)
+vim.keymap.set("n", "<C-j>", "<C-w>j", options)
+vim.keymap.set("n", "<C-k>", "<C-w>k", options)
+vim.keymap.set("n", "<C-l>", "<C-w>l", options)
 
 ---- Indent in visual mode
-vim.api.nvim_set_keymap("v", "<", "<gv", options)
-vim.api.nvim_set_keymap("v", ">", ">gv", options)
+vim.keymap.set("v", "<", "<gv", options)
+vim.keymap.set("v", ">", ">gv", options)
 
 ---- Indent whole file
-vim.api.nvim_set_keymap('n', '<leader>f', 'gg=G<C-o>zz', options)
-
----- Autoclose brackets
-vim.api.nvim_set_keymap("i", "(", "()<Left>", options)
-vim.api.nvim_set_keymap("i", "(<CR>", "(<CR>)<Esc>ko", options)
-vim.api.nvim_set_keymap("i", "[", "[]<Left>", options)
-vim.api.nvim_set_keymap("i", "[<CR>", "[<CR>]<Esc>ko", options)
-vim.api.nvim_set_keymap("i", "{", "{}<Left>", options)
-vim.api.nvim_set_keymap("i", "{<CR>", "{<CR>}<Esc>ko", options)
-vim.api.nvim_set_keymap("i", "'", "''<Left>", options)
-vim.api.nvim_set_keymap("i", "\"", "\"\"<Left>", options)
+vim.keymap.set('n', '<leader>f', 'gg=G<C-o>zz', options)
 
 ---- Open telescope
-vim.api.nvim_set_keymap( "n", "<leader>tf", "<Cmd>lua require('telescope.builtin').find_files()<CR>", options)
-vim.api.nvim_set_keymap( "n", "<leader>tl", "<Cmd>lua require('telescope.builtin').live_grep()<CR>", options)
-vim.api.nvim_set_keymap( "n", "<leader>ts", "<Cmd>lua require('telescope.builtin').grep_string()<CR>", options)
-vim.api.nvim_set_keymap( "n", "<leader>tcb", "<Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", options)
-vim.api.nvim_set_keymap( "n", "<leader>tb", "<Cmd>lua require('telescope.builtin').buffers()<CR>", options)
+vim.keymap.set( "n", "<leader>tf", "<Cmd>lua require('telescope.builtin').find_files()<CR>", options)
+vim.keymap.set( "n", "<leader>tl", "<Cmd>lua require('telescope.builtin').live_grep()<CR>", options)
+vim.keymap.set( "n", "<leader>ts", "<Cmd>lua require('telescope.builtin').grep_string()<CR>", options)
+vim.keymap.set( "n", "<leader>tcb", "<Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", options)
+vim.keymap.set( "n", "<leader>tb", "<Cmd>lua require('telescope.builtin').buffers()<CR>", options)
 
 ---------------------------- Colorscheme ---------------------------------------------
 
@@ -167,3 +154,5 @@ require("luasnip.loaders.from_vscode").load()
 require("treeSitter")
 require("lightSpeed")
 require("toggleterm").setup()
+require("Comment").setup()
+require("autopairs")

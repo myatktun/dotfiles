@@ -2,7 +2,7 @@
 Current Theme
 
 ## Contents
-- os: Fedora 35
+- os: Fedora 36
 - wm: [i3-gaps](https://github.com/Airblader/i3.git)
 - bar: [i3status](https://github.com/i3/i3status.git)
 - terminal: [kitty](https://github.com/kovidgoyal/kitty.git) (with [starship](https://starship.rs))
