@@ -15,7 +15,7 @@ configuration {
     scroll-method:      0;
     click-to-exit:      true;
     sidebar-mode:       true;
-    modi:        "window,run,drun,calc";
+    modi:        "window,run,drun,calc,:music,😀:/usr/bin/rofimoji";
     display-window:     "";
     display-windowcd:   "";
     display-run:        "";
@@ -30,7 +30,8 @@ window {
     border-color:   @fg;
     border-radius:  0px;
     padding:        20;
-    width:          22%;
+    width:          26%;
+    height:         45%;
 }
 
 prompt {

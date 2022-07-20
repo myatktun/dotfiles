@@ -6,6 +6,9 @@ exec_always --no-startup-id ~/.config/i3/display.sh
 # load wallpaper
 exec_always --no-startup-id feh --bg-fill ~/Pictures/solid-color-282828.png
 
+# start mpd
+exec --no-startup-id mpd ~/.config/mpd/mpd.conf
+
 # disable mouse acceleration
 exec_always --no-startup-id xinput --set-prop 25 'libinput Accel Profile Enabled' 0, 1
 exec_always --no-startup-id xinput --set-prop 16 'libinput Accel Profile Enabled' 0, 1
@@ -69,7 +72,9 @@ client.urgent            $urgent  $urgent  $text    $urgent
 client.background        $unfocus
 
 # gaps and borders
-gaps inner 4
+hide_edge_borders smart
+smart_gaps on
+gaps inner 5
 gaps outer 7
 gaps top 0
 
@@ -93,19 +98,26 @@ bar {
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # change audio output
-bindsym $mod+$alt+1 exec --no-startup-id pactl set-default-sink $(pactl list sinks | grep Name | awk -F: '{print $2}' | grep analog)
-bindsym $mod+$alt+2 exec --no-startup-id pactl set-default-sink $(pactl list sinks | grep Name | awk -F: '{print $2}' | grep hdmi)
+set $internal_audio pactl set-default-sink $(pactl list sinks | grep Name | awk -F: '{print $2}' | grep analog) && amixer set Master 26% && amixer -c 1 set "Auto-Mute Mode" Enabled && amixer -c 1 set PCM 100% && amixer -c 1 set Mic 75% && amixer -c 1 set Front unmute
+set $external_audio pactl set-default-sink $(pactl list sinks | grep Name | awk -F: '{print $2}' | grep hdmi)
+set $bluetooth_audio pactl set-default-sink $(pactl list sinks | grep Name | awk -F: '{print $2}' | grep bluez)
+bindsym $mod+$alt+1 exec --no-startup-id $internal_audio
+bindsym $mod+$alt+2 exec --no-startup-id $external_audio
+bindsym $mod+$alt+3 exec --no-startup-id $bluetooth_audio
+
+# connect to bluetooth speaker
+bindsym $mod+$alt+c exec --no-startup-id bluetoothctl devices | awk -F' ' '{print $2}' | xargs bluetoothctl connect
+bindsym $mod+$alt+d exec --no-startup-id bluetoothctl devices | awk -F' ' '{print $2}' | xargs bluetoothctl disconnect
 
 # open a terminal
 bindsym $mod+Return workspace $workspace1; exec kitty
-bindsym $mod+Shift+t exec kitty -e tmux
-bindsym $mod+Shift+Return exec kitty
+bindsym $mod+Shift+Return exec kitty -e tmux
 
 # open chrome
 bindsym $mod+Shift+g exec google-chrome
@@ -118,8 +130,9 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id rofi -show drun
 
 # change keyboard layout
-bindsym $mod+Control+1 exec --no-startup-id setxkbmap us && setxkbmap -query | awk '/layout/{print $2}' > ~/.config/i3status/KBlayout.log && $refresh_i3status
-bindsym $mod+Control+2 exec --no-startup-id setxkbmap dvorak && setxkbmap -query | awk '/layout/{print $2}' > ~/.config/i3status/KBlayout.log && $refresh_i3status
+bindsym $mod+Control+space exec --no-startup-id setxkbmap us && setxkbmap -query | awk '/layout/{print $2}' > ~/.config/i3status/KBlayout.log && $refresh_i3status
+bindsym $mod+Control+d exec --no-startup-id setxkbmap dvorak && setxkbmap -query | awk '/layout/{print $2}' > ~/.config/i3status/KBlayout.log && $refresh_i3status
+bindsym $mod+$alt+space exec --no-startup-id setxkbmap mm && setxkbmap -query | awk '/layout/{print $2}' > ~/.config/i3status/KBlayout.log && $refresh_i3status
 
 # open zathura
 # bindsym $mod+z exec --no-startup-id zathura "$(cat ~/.local/share/zathura/history | grep -Po "\[\K[^\]]*" | tail -1)" 

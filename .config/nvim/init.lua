@@ -23,7 +23,6 @@ vim.o.sidescrolloff = 8
 vim.o.foldmethod = "expr"
 vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 vim.o.wrap = false
-vim.g.nvim_tree_respect_buf_cwd = 1
 vim.g.user_emmet_leader_key = "<C-Q>"
 vim.g.vimwiki_list = { {} }
 vim.g.vimwiki_list = { { path = "~/Documents/Vimwiki" , syntax = "markdown", ext = "md"} }
@@ -36,7 +35,6 @@ vim.cmd([[command! Gccr !gcc -lm -o %< % && time ./%<]])
 vim.cmd([[command! Gcp !g++ -lm -o %< %]])
 vim.cmd([[command! Gcpr !g++ -lm -o %< % && time ./%<]])
 vim.cmd([[command! CopyBuffPath let @+ = expand('%:p')]])
-vim.cmd([[command! Source source ~/.config/nvim/init.lua]])
 vim.cmd([[autocmd BufEnter * silent! lcd %:p:h]])
 vim.cmd([[autocmd CmdLineEnter : set ignorecase nosmartcase]])
 vim.cmd([[autocmd FileType javascript,css,c,cpp,json nmap <silent> <leader>; <Plug>(cosco-commaOrSemiColon)]])
@@ -44,8 +42,9 @@ vim.cmd([[autocmd BufEnter * set fo-=o fo-=r fo-=c]])
 vim.cmd([[autocmd BufRead,BufNewFile Jenkinsfile setf groovy]])
 vim.cmd([[autocmd FileType kivy setlocal commentstring=#\ %s]])
 vim.cmd([[autocmd FileType gitcommit setlocal cc=72]])
-vim.cmd( [[autocmd BufRead,BufNewFile *.c,*.cpp setlocal shiftwidth=8 tabstop=8 softtabstop=8 cc=81 cindent noet]])
-vim.cmd( [[autocmd BufRead,BufNewFile *.md setlocal cc=95]])
+vim.cmd([[autocmd BufRead,BufNewFile * setlocal cc=100]])
+vim.cmd([[autocmd BufRead,BufNewFile *.md,*.txt setlocal cc=95 spell spelllang=en_us]])
+vim.cmd([[autocmd FileType *.c,*.cpp setlocal shiftwidth=8 tabstop=8 softtabstop=8 cc=80 cindent noet]])
 
 ---------------------------- Keybinds ---------------------------------------------------------
 
@@ -142,7 +141,7 @@ vim.cmd([[colorscheme gruvbox]])
 require("plugins")
 require("nvCmp")
 require("nvimLsp")
-require("nvim-tree").setup()
+require("nvimTree")
 require("bufferLine")
 require("luaLine")
 require("gitsigns").setup()
@@ -154,5 +153,4 @@ require("luasnip.loaders.from_vscode").load()
 require("treeSitter")
 require("lightSpeed")
 require("toggleterm").setup()
-require("Comment").setup()
 require("autopairs")

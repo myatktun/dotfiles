@@ -6,7 +6,7 @@ check_path() {
       arrDir=(${1//// })
       path=$(find ~/Projects/"${arrDir[0]^}" -maxdepth 1 -type d -iname "*${arrDir[1]}*" | head -1)
     else
-      path=$(find ~/Projects -type d -iname "$1" | head -1)
+      path=$(find ~/Projects -maxdepth 2 -type d -iname "$1" | head -1)
     fi
   elif [[ $1 == linux ]]; then
     path=~/Linux
@@ -47,6 +47,10 @@ yarn() {
   # tmux send-keys -t ide:1.2 yarn\ dev Enter
 }
 
+ns() {
+  tmux break-pane -s ide:1.2 -t ide:2
+}
+
 Functions() {
   for function in $@; do
     $function
@@ -63,6 +67,7 @@ main() {
       sep=`echo $@ | grep -bo "-" | cut -d: -f1`
       Functions "${args:$sep+1}"
     fi
+    tmux select-window -t ide:1
     tmux send-keys -t ide:1.1 nvim\ . Enter
     tmux select-pane -t ide:1.1
   fi
