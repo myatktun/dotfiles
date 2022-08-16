@@ -3,14 +3,15 @@
 vim.o.cursorline = true
 vim.o.mouse = "a"
 vim.o.relativenumber = true
-vim.o.tabstop = 2
+vim.o.tabstop = 4
 vim.o.number = true
-vim.o.shiftwidth = 2
-vim.o.softtabstop = 2
+vim.o.shiftwidth = 4
+vim.o.softtabstop = 4
 vim.o.expandtab = true
 vim.o.splitright = true
 vim.o.splitbelow = true
 vim.o.timeoutlen = 500
+vim.o.updatetime = 350
 vim.o.showcmd = true
 vim.o.showtabline = 2
 vim.o.termguicolors = true
@@ -30,21 +31,45 @@ vim.g.nvim_markdown_preview_theme = "solarized-dark"
 vim.cmd([[command! MakeTags !ctags -R .]])
 vim.cmd([[command! Make make %< ]])
 vim.cmd([[command! Node !node % ]])
-vim.cmd([[command! Gcc !gcc -lm -o %< %]])
-vim.cmd([[command! Gccr !gcc -lm -o %< % && time ./%<]])
-vim.cmd([[command! Gcp !g++ -lm -o %< %]])
-vim.cmd([[command! Gcpr !g++ -lm -o %< % && time ./%<]])
+vim.cmd([[command! Gcc !time gcc -Wall -o %< %]])
+vim.cmd([[command! Gccr !time gcc -Wall -o %< % && ./%<]])
+vim.cmd([[command! Gcp !time g++ -Wall -o %< %]])
+vim.cmd([[command! Gcpr !time g++ -Wall -o %< % && ./%<]])
+vim.cmd([[command! ClangF !clang-format -i %]])
+vim.cmd([[command! Chrome !google-chrome %]])
 vim.cmd([[command! CopyBuffPath let @+ = expand('%:p')]])
-vim.cmd([[autocmd BufEnter * silent! lcd %:p:h]])
+
+vim.api.nvim_create_autocmd({ 'BufEnter' }, {
+  pattern = { '*' },
+  command = [[silent! lcd %:p:h]],
+})
+
 vim.cmd([[autocmd CmdLineEnter : set ignorecase nosmartcase]])
 vim.cmd([[autocmd FileType javascript,css,c,cpp,json nmap <silent> <leader>; <Plug>(cosco-commaOrSemiColon)]])
 vim.cmd([[autocmd BufEnter * set fo-=o fo-=r fo-=c]])
 vim.cmd([[autocmd BufRead,BufNewFile Jenkinsfile setf groovy]])
 vim.cmd([[autocmd FileType kivy setlocal commentstring=#\ %s]])
 vim.cmd([[autocmd FileType gitcommit setlocal cc=72]])
-vim.cmd([[autocmd BufRead,BufNewFile * setlocal cc=100]])
-vim.cmd([[autocmd BufRead,BufNewFile *.md,*.txt setlocal cc=95 spell spelllang=en_us]])
-vim.cmd([[autocmd FileType *.c,*.cpp setlocal shiftwidth=8 tabstop=8 softtabstop=8 cc=80 cindent noet]])
+
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = { '*' },
+  command = [[setlocal cc=100]],
+})
+
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = { '*.md', '*.txt' },
+  command = [[setlocal cc=95 spell spelllang=en_us]],
+})
+
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = { '*.c' },
+  command = [[setlocal cc=80 shiftwidth=8 tabstop=8 softtabstop=8 cindent noet]],
+})
+
+vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+  pattern = { '*' },
+  command = [[%s/\s\+$//e]],
+})
 
 ---------------------------- Keybinds ---------------------------------------------------------
 
@@ -70,9 +95,6 @@ vim.keymap.set("n", "<F8>", ":SymbolsOutline<CR>", options)
 ---- Change directory
 vim.keymap.set("n", "<leader>ch", ":cd ~/", options)
 vim.keymap.set("n", "<leader>cc", ":cd ", options)
-
----- Open current file in chrome
-vim.keymap.set("n", "<F12>", ":!google-chrome %<CR>", options)
 
 ---- Switch buffers
 vim.keymap.set("n", "L", ":bn<CR>", options)
@@ -106,7 +128,7 @@ vim.keymap.set("n", "<leader>aa", "ggVG\"+y", options)
 ---- Load scheme
 vim.keymap.set("n",";html",":-1read $HOME/.config/nvim/.skeleton.html<CR>7jwf>a",options)
 vim.keymap.set("n",";ct",":-1read $HOME/.config/nvim/.skeleton.c<CR>4jo", options)
-vim.keymap.set( "n", ";cpt", ":-1read $HOME/.config/nvim/.skeleton.cpp<CR>5jo", options)
+vim.keymap.set( "n", ";cpt", ":-1read $HOME/.config/nvim/.skeleton.cpp<CR>4jo", options)
 
 ---- Nvimtree
 vim.keymap.set("n", "<C-n>", ":NvimTreeFindFileToggle<CR>", options)
@@ -123,7 +145,7 @@ vim.keymap.set("v", "<", "<gv", options)
 vim.keymap.set("v", ">", ">gv", options)
 
 ---- Indent whole file
-vim.keymap.set('n', '<leader>f', 'gg=G<C-o>zz', options)
+vim.keymap.set('n', '<leader>gf', 'gg=G<C-o>zz', options)
 
 ---- Open telescope
 vim.keymap.set( "n", "<leader>tf", "<Cmd>lua require('telescope.builtin').find_files()<CR>", options)
@@ -146,11 +168,14 @@ require("bufferLine")
 require("luaLine")
 require("gitsigns").setup()
 require("colorizer").setup()
-require("telescope").load_extension("fzf")
 require("telescope").setup({ defaults = { sorting_strategy = "ascending" } })
+require("telescope").load_extension("fzf")
+require("telescope").load_extension("dap")
 require("neoscroll").setup()
 require("luasnip.loaders.from_vscode").load()
 require("treeSitter")
 require("lightSpeed")
 require("toggleterm").setup()
 require("autopairs")
+require("nvimDap")
+require("symbols-outline").setup()

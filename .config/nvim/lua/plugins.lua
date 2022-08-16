@@ -9,8 +9,8 @@ end
 
 return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
-  use "akinsho/bufferline.nvim"
-  use "akinsho/toggleterm.nvim"
+  use 'akinsho/bufferline.nvim'
+  use 'akinsho/toggleterm.nvim'
   -- use "brymer-meneses/grammar-guard.nvim"
   -- use 'chrisbra/csv.vim'
   use 'christoomey/vim-system-copy'
@@ -27,16 +27,22 @@ return require('packer').startup(function()
   use 'lfilho/cosco.vim'
   use 'lukas-reineke/indent-blankline.nvim'
   use 'mattn/emmet-vim'
+  use 'mfussenegger/nvim-dap'
+  use { "microsoft/vscode-js-debug", opt = true, run = "npm install --legacy-peer-deps && npm run compile" }
   use 'morhetz/gruvbox'
+  use 'mxsdev/nvim-dap-vscode-js'
   use 'neovim/nvim-lspconfig'
   use 'norcalli/nvim-colorizer.lua'
   use {'nvim-telescope/telescope.nvim',  requires = {'nvim-lua/plenary.nvim'}}
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  use {'nvim-telescope/telescope-dap.nvim' }
   use {'nvim-treesitter/nvim-treesitter',run = ':TSUpdate'}
   -- use 'numToStr/Comment.nvim'
   use 'nvim-lualine/lualine.nvim'
   use 'rafamadriz/friendly-snippets'
+  use 'rcarriga/nvim-dap-ui'
   use 'simrat39/symbols-outline.nvim'
+  use 'theHamsta/nvim-dap-virtual-text'
   use 'toppair/reach.nvim'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-commentary'
