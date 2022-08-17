@@ -2,7 +2,7 @@ command_timeout = 1000
 
 [character]
 error_symbol = "[✖](bold red) "
-success_symbol = "[](bold #458588)"
+success_symbol = "[](bold #626262)"
 # success_symbol = "[❯❯](bold #458588)"
 
 [cmd_duration]
@@ -12,7 +12,7 @@ format = " took [$duration]($style)"
 [directory]
 truncation_length = 4
 format = "[$path]($style)[$read_only]($read_only_style) "
-style = "bold #8ec07c"
+style = "bold #458588"
 truncation_symbol = ""
 
 [git_branch]
