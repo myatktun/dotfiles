@@ -1,7 +1,9 @@
 require('lualine').setup {
   options = {
     theme = 'gruvbox_dark',
-    globalstatus = true
+    globalstatus = true,
+    component_separators = {left = '|', right = '|'},
+    section_separators = {left = ' ', right = ' '}
   },
   sections = {
     lualine_c = {{'filename',path = 2}},

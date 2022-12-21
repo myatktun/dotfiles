@@ -38,6 +38,22 @@ vim.cmd([[command! Gcpr !time g++ -Wall -o %< % && ./%<]])
 vim.cmd([[command! ClangF !clang-format -i %]])
 vim.cmd([[command! Chrome !google-chrome %]])
 vim.cmd([[command! CopyBuffPath let @+ = expand('%:p')]])
+vim.cmd([[command! Prettier !yarn prettier $(pwd)/% --write]])
+
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = { '*.tfstate', '*.tfstate.backup' },
+  command = [[silent! set filetype=json]],
+})
+
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = { '.terraformrc', 'terraform.rc', '*.hcl' },
+  command = [[silent! set filetype=hcl]],
+})
+
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = { '*.tf', '*.tfvars' },
+  command = [[silent! set filetype=terraform syntax=tf]],
+})
 
 vim.api.nvim_create_autocmd({ 'BufEnter' }, {
   pattern = { '*' },

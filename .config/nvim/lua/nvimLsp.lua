@@ -20,6 +20,7 @@ local on_attach = function(client, bufnr)
 
     -- Mappings.
     local opts = { noremap=true, silent=true }
+    local au_lsp = vim.api.nvim_create_augroup("eslint_lsp", { clear = true })
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
@@ -39,7 +40,28 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
     -- buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
     buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-    vim.api.nvim_exec([[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync(nil, 100)]], false)
+
+
+    vim.api.nvim_create_autocmd("BufWritePre", {
+        pattern = "*",
+        callback = function()
+            if(vim.bo.filetype ~= "json") then
+                vim.lsp.buf.formatting_sync()
+            end
+        end,
+        group = au_lsp,
+    })
+
+    -- vim.api.nvim_create_autocmd("BufWritePost", {
+    --     pattern = "*.json",
+    --     command = [[silent !yarn prettier $(pwd)/% --write]]
+    -- })
+
+    vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+        pattern = { '*.js', '*.jsx', '*.ts', '*.tsx' },
+        command = [[EslintFixAll]],
+    })
+
     vim.api.nvim_create_autocmd("CursorHold", {
         buffer = bufnr,
         callback = function()
@@ -77,7 +99,8 @@ require'lspconfig'.sumneko_lua.setup {
             },
             workspace = {
                 -- Make the server aware of Neovim runtime files
-                library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true}
+                library = {[vim.fn.expand('$VIMRUNTIME/lua')] = true, [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true},
+                checkThirdParty = false
             }
         }
     }
@@ -88,7 +111,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'clangd','bashls', 'dockerls', 'html','cssls', 'jsonls', 'pyright', 'rust_analyzer', 'tsserver' }
+local servers = { 'clangd','bashls', 'dockerls', 'html','cssls', 'jsonls', 'pyright', 'rust_analyzer', 'tsserver', 'terraformls', 'eslint', 'yamlls' }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
         root_dir = util.root_pattern(".git", "package.json", "tsconfig.json", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt"),
@@ -96,6 +119,13 @@ for _, lsp in ipairs(servers) do
         flags = {
             debounce_text_changes = 150,
         },
-        capabilities = capabilities
+        capabilities = capabilities,
+        settings = {
+            yaml = {
+                schemas = {
+                        ["https://raw.githubusercontent.com/instrumenta/kubernetes-json-schema/master/v1.9.9-standalone-strict/all.json"] = "/*.k8s.y*ml",
+                      },
+            }
+        }
     }
 end

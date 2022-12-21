@@ -1,77 +1,91 @@
 #!/bin/bash
 
 check_path() {
-  if [[ ! -z $1 && $1 != linux && $1 != "." ]]; then # determine path first
-    if [[ $1 == *"/"* ]]; then
-      arrDir=(${1//// })
-      path=$(find ~/Projects/"${arrDir[0]^}" -maxdepth 1 -type d -iname "*${arrDir[1]}*" | head -1)
+    if [[ ! -z $1 && $1 != linux && $1 != "." ]]; then # determine path first
+        if [[ $1 == *"/"* ]]; then
+            arrDir=(${1//// })
+            path=$(find ~/Projects/"${arrDir[0]^}" -maxdepth 1 -type d -iname "*${arrDir[1]}*" | head -1)
+        else
+            path=$(find ~/Projects -maxdepth 2 -type d -iname "$1" | head -1)
+        fi
+    elif [[ $1 == linux ]]; then
+        path=~/Linux
     else
-      path=$(find ~/Projects -maxdepth 2 -type d -iname "$1" | head -1)
+        path=$(pwd) # default path is current
     fi
-  elif [[ $1 == linux ]]; then
-    path=~/Linux
-  else
-    path=$(pwd) # default path is current
-  fi
 }
 
 kivy() {
-  tmux send-keys -t ide:1.1 source\ bin/activate \&\& clear Enter
-  tmux send-keys -t ide:1.2 source\ bin/activate \&\& clear Enter
+    tmux send-keys -t ide:$WINDOW_COUNT.1 source\ bin/activate \&\& clear Enter
+    tmux send-keys -t ide:$WINDOW_COUNT.2 source\ bin/activate \&\& clear Enter
 }
 
 lsvr() {
-  tmux new-window -t ide -c $path
-  tmux send-keys -t ide:2 live-server Enter
-  tmux select-window -t ide:1
+    tmux new-window -t ide -c $path
+    tmux send-keys -t ide:$WINDOW_COUNT live-server Enter
+    tmux select-window -t ide:$WINDOW_COUNT
 }
 
 sp() {
-  tmux select-pane -t ide:1.2
-  tmux split-window -t ide -c $path -h -p 66
-  tmux split-window -t ide -c $path -h -p 50
+    tmux split-window -t ide:$WINDOW_COUNT.2 -c $path -h -p 66
+    tmux split-window -t ide:$WINDOW_COUNT.3 -c $path -h -p 50
 }
 
 exp() {
-  tmux new-window -t ide -c $path
-  tmux send-keys -t ide:2 yarn\ start Enter
-  tmux select-window -t ide:1
-  # tmux send-keys -t ide:1.2 yarn\ android Enter
+    tmux new-window -t ide -c $path
+    tmux send-keys -t ide:$WINDOW_COUNT yarn\ start Enter
+    tmux select-window -t ide:$WINDOW_COUNT
+    # tmux send-keys -t ide:1.2 yarn\ android Enter
 }
 
 yarn() {
-  tmux new-window -t ide -c $path
-  # tmux send-keys -t ide:2 yarn\ start Enter
-  # tmux send-keys -t ide:2 yarn\ watch Enter
-  tmux select-window -t ide:1
-  # tmux send-keys -t ide:1.2 yarn\ dev Enter
+    tmux new-window -t ide -c $path
+    # tmux send-keys -t ide:2 yarn\ start Enter
+    # tmux send-keys -t ide:2 yarn\ watch Enter
+    tmux select-window -t ide:$WINDOW_COUNT
+    # tmux send-keys -t ide:1.2 yarn\ dev Enter
 }
 
 ns() {
-  tmux break-pane -s ide:1.2 -t ide:2
+    tmux break-pane -s ide:$WINDOW_COUNT.2 -t ide:$(($WINDOW_COUNT + 1))
 }
 
 Functions() {
-  for function in $@; do
-    $function
-  done
+    for function in $@; do
+        $function
+    done
 }
 
 main() {
-  if ! tmux has-session -t ide; then # create new tmux session if not exist
-    check_path $1
-    tmux new -s ide -c $path -d
-    tmux split-window -t ide -c $path -v -p 20
-    if [[ $# -gt 1 ]]; then
-      args=$@
-      sep=`echo $@ | grep -bo "-" | cut -d: -f1`
-      Functions "${args:$sep+1}"
+    if ! tmux has-session -t ide; then # create new tmux session if not exist
+        check_path $1
+        tmux new -s ide -c $path -d
+        tmux split-window -t ide -c $path -v -p 20
+        if [[ $# -gt 1 ]]; then
+            args=$@
+            sep=`echo $@ | grep -bo "-" | cut -d: -f1`
+            Functions "${args:$sep+1}"
+        fi
+        tmux select-window -t ide:1
+        tmux send-keys -t ide:1.1 nvim\ . Enter
+        tmux select-pane -t ide:1.1
+    else # open new window if exist and path is provided
+        WINDOW_COUNT=$(($(tmux list-windows -t ide | wc -l)+1))
+        if [[ $# -ge 1 ]]; then
+            check_path $1
+            tmux new-window -t ide -c $path -d
+            tmux split-window -t ide:$WINDOW_COUNT -c $path -v -p 20
+            if [[ $# -gt 1 ]]; then
+                args="${@:2}"
+                sep=`echo $args | grep -bo "-" | cut -d: -f1`
+                Functions "${args:$sep+1}"
+            fi
+            tmux select-window -t ide:$WINDOW_COUNT
+            tmux send-keys -t ide:$WINDOW_COUNT.1 nvim\ . Enter
+            tmux select-pane -t ide:$WINDOW_COUNT.1
+        fi
     fi
-    tmux select-window -t ide:1
-    tmux send-keys -t ide:1.1 nvim\ . Enter
-    tmux select-pane -t ide:1.1
-  fi
-  tmux switch -t ide
+    tmux switch -t ide
 }
 
 main "$@"

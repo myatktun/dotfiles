@@ -75,12 +75,29 @@ eval "$(pyenv virtualenv-init -)"
 # cargo path (rust pkp manager)
 export PATH=$PATH:$HOME/.cargo/env
 
+# terraform
+alias tf="terraform"
+complete -C $(which terraform) terraform
+
 # to display git status
 # source ~/.git-prompt.sh
 # export GIT_PS1_SHOWDIRTYSTATE=true
 # export GIT_PS1_SHOWUNTRACKEDFILES=true
 # export GIT_PS1_SHOWUPSTREAM="verbose"
 # export GIT_PS1_SHOWCOLORHINTS=true
+
+# K8s config
+alias k="kubectl"
+complete -o default -F __start_kubectl k
+source <(kubectl completion bash)
+source <(minikube completion bash)
+
+# eksctl autocomplete
+source <(eksctl completion bash)
+complete -C '/usr/local/bin/aws_completer' aws
+
+# Helm config
+source <(helm completion bash)
 
 # fzf key-bindings
 if [ -x "$(command -v fzf)"  ]
