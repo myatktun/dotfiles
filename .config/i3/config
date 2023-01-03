@@ -135,12 +135,16 @@ bindsym $mod+Shift+Return exec kitty -e tmux
 # open chrome
 bindsym $mod+Shift+g exec google-chrome
 bindsym $mod+g workspace $workspace2; exec google-chrome
+bindsym $mod+Control+g workspace $workspace0; exec google-chrome --incognito
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # open rofi
 bindsym $mod+d exec --no-startup-id rofi -show drun
+
+# open spotify
+bindsym $mod+Control+s workspace $workspace0; exec --no-startup-id spotify
 
 # change keyboard layout
 bindsym $mod+Control+space exec --no-startup-id setxkbmap us && setxkbmap -query | awk '/layout/{print $2}' > ~/.config/i3status/KBlayout.log && $refresh_i3status

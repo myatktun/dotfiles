@@ -11,8 +11,6 @@ return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
   use 'akinsho/bufferline.nvim'
   use 'akinsho/toggleterm.nvim'
-  -- use "brymer-meneses/grammar-guard.nvim"
-  -- use 'chrisbra/csv.vim'
   use 'christoomey/vim-system-copy'
   use 'christoomey/vim-titlecase'
   use 'davidgranstrom/nvim-markdown-preview'
@@ -37,7 +35,6 @@ return require('packer').startup(function()
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use {'nvim-telescope/telescope-dap.nvim' }
   use {'nvim-treesitter/nvim-treesitter',run = ':TSUpdate'}
-  -- use 'numToStr/Comment.nvim'
   use 'nvim-lualine/lualine.nvim'
   use 'rafamadriz/friendly-snippets'
   use 'rcarriga/nvim-dap-ui'
