@@ -10,6 +10,10 @@ exec_always --no-startup-id feh --bg-fill ~/Pictures/solid-color-282828.png
 exec_always --no-startup-id xinput --set-prop 25 'libinput Accel Profile Enabled' 0, 1
 exec_always --no-startup-id xinput --set-prop 16 'libinput Accel Profile Enabled' 0, 1
 
+# touchpad settings
+exec_always --no-startup-id xinput set-prop 21 'libinput Tapping Enabled' 1
+exec_always --no-startup-id xinput set-prop 21 'libinput Natural Scrolling Enabled' 1
+
 # show keyboard layout on i3bar
 exec_always --no-startup-id setxkbmap $(cat ~/.config/i3status/KBlayout.log)
 
@@ -68,7 +72,6 @@ for_window [class=".*"] border pixel 1
 # set colors
 set $bgcolor        #282828
 set $focused        #d79921
-# set $focused        #8ec07c
 set $inactive       #7c6f64
 set $border         #fbf1c7
 set $text           #ebdbb2
@@ -102,6 +105,7 @@ bar {
       # separator  #fabd2f
         #                  border     background   text
         focused_workspace  $bgcolor    $bgcolor    $focused
+        active_workspace   $bgcolor    $bgcolor    #ffffff
         inactive_workspace $bgcolor    $bgcolor    $inactive
         urgent_workspace   $bgcolor    $bgcolor    $urgent
     }

@@ -46,7 +46,7 @@ local on_attach = function(client, bufnr)
         pattern = "*",
         callback = function()
             if(vim.bo.filetype ~= "json") then
-                vim.lsp.buf.formatting_sync()
+                vim.lsp.buf.format()
             end
         end,
         group = au_lsp,
@@ -111,7 +111,11 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'clangd','bashls', 'dockerls', 'html','cssls', 'jsonls', 'pyright', 'rust_analyzer', 'tsserver', 'terraformls', 'eslint', 'yamlls' }
+local servers = { 'bashls', 'clangd', 'cssls',
+                    'dockerls', 'eslint', 'html', 'jsonls',
+                    'pyright', 'rust_analyzer', 'terraformls',
+                    'tsserver',  'yamlls' }
+
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
         root_dir = util.root_pattern(".git", "package.json", "tsconfig.json", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt"),
