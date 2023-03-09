@@ -19,6 +19,8 @@ vim.o.hidden = true
 vim.o.signcolumn = "yes:1"
 vim.o.list = true
 vim.o.listchars = "tab: -,trail:·"
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 vim.o.scrolloff = 8
 vim.o.sidescrolloff = 8
 vim.o.foldmethod = "expr"
@@ -26,7 +28,7 @@ vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 vim.o.wrap = false
 vim.g.user_emmet_leader_key = "<C-Q>"
 vim.g.vimwiki_list = { {} }
-vim.g.vimwiki_list = { { path = "~/Documents/Vimwiki" , syntax = "markdown", ext = "md"} }
+vim.g.vimwiki_list = { { path = "~/Documents/Vimwiki", syntax = "markdown", ext = "md" } }
 vim.g.nvim_markdown_preview_theme = "solarized-dark"
 vim.cmd([[command! MakeTags !ctags -R .]])
 vim.cmd([[command! Make make %< ]])
@@ -43,23 +45,23 @@ vim.cmd([[command! CopyBuffPath let @+ = expand('%:p')]])
 vim.cmd([[command! Prettier !yarn prettier $(pwd)/% --write]])
 
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-  pattern = { '*.tfstate', '*.tfstate.backup' },
-  command = [[silent! set filetype=json]],
+    pattern = { '*.tfstate', '*.tfstate.backup' },
+    command = [[silent! set filetype=json]],
 })
 
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-  pattern = { '.terraformrc', 'terraform.rc', '*.hcl' },
-  command = [[silent! set filetype=hcl]],
+    pattern = { '.terraformrc', 'terraform.rc', '*.hcl' },
+    command = [[silent! set filetype=hcl]],
 })
 
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-  pattern = { '*.tf', '*.tfvars' },
-  command = [[silent! set filetype=terraform syntax=tf]],
+    pattern = { '*.tf', '*.tfvars' },
+    command = [[silent! set filetype=terraform syntax=tf]],
 })
 
 vim.api.nvim_create_autocmd({ 'BufEnter' }, {
-  pattern = { '*' },
-  command = [[silent! lcd %:p:h]],
+    pattern = { '*' },
+    command = [[silent! lcd %:p:h]],
 })
 
 vim.cmd([[autocmd CmdLineEnter : set ignorecase nosmartcase]])
@@ -70,28 +72,28 @@ vim.cmd([[autocmd FileType kivy setlocal commentstring=#\ %s]])
 vim.cmd([[autocmd FileType gitcommit setlocal cc=72]])
 
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-  pattern = { '*' },
-  command = [[setlocal cc=100]],
+    pattern = { '*' },
+    command = [[setlocal cc=100]],
 })
 
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-  pattern = { '*.md', '*.txt' },
-  command = [[setlocal cc=95 spell spelllang=en_us]],
+    pattern = { '*.md', '*.txt' },
+    command = [[setlocal cc=95 spell spelllang=en_us]],
 })
 
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-  pattern = { '*.c' },
-  command = [[setlocal cc=80 shiftwidth=8 tabstop=8 softtabstop=8 cindent noet]],
+    pattern = { '*.c' },
+    command = [[setlocal cc=80 shiftwidth=8 tabstop=8 softtabstop=8 cindent noet]],
 })
 
 vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-  pattern = { '*' },
-  command = [[%s/\s\+$//e]],
+    pattern = { '*' },
+    command = [[%s/\s\+$//e]],
 })
 
 ---------------------------- Keybinds ---------------------------------------------------------
 
-local options = {silent = true }
+local options = { silent = true }
 
 ---- Leader
 vim.keymap.set("n", "<Space>", "<NOP>", options)
@@ -144,9 +146,9 @@ vim.keymap.set("n", "<leader>ya", "ggVGy", options)
 vim.keymap.set("n", "<leader>aa", "ggVG\"+y", options)
 
 ---- Load scheme
-vim.keymap.set("n",";html",":-1read $HOME/.config/nvim/.skeleton.html<CR>7jwf>a",options)
-vim.keymap.set("n",";ct",":-1read $HOME/.config/nvim/.skeleton.c<CR>4jo", options)
-vim.keymap.set( "n", ";cpt", ":-1read $HOME/.config/nvim/.skeleton.cpp<CR>4jo", options)
+vim.keymap.set("n", ";html", ":-1read $HOME/.config/nvim/.skeleton.html<CR>7jwf>a", options)
+vim.keymap.set("n", ";ct", ":-1read $HOME/.config/nvim/.skeleton.c<CR>4jo", options)
+vim.keymap.set("n", ";cpt", ":-1read $HOME/.config/nvim/.skeleton.cpp<CR>4jo", options)
 
 ---- Nvimtree
 vim.keymap.set("n", "<C-n>", ":NvimTreeFindFileToggle<CR>", options)
@@ -166,11 +168,11 @@ vim.keymap.set("v", ">", ">gv", options)
 vim.keymap.set('n', '<leader>gf', 'gg=G<C-o>zz', options)
 
 ---- Open telescope
-vim.keymap.set( "n", "<leader>tf", "<Cmd>lua require('telescope.builtin').find_files()<CR>", options)
-vim.keymap.set( "n", "<leader>tl", "<Cmd>lua require('telescope.builtin').live_grep()<CR>", options)
-vim.keymap.set( "n", "<leader>ts", "<Cmd>lua require('telescope.builtin').grep_string()<CR>", options)
-vim.keymap.set( "n", "<leader>tcb", "<Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", options)
-vim.keymap.set( "n", "<leader>tb", "<Cmd>lua require('telescope.builtin').buffers()<CR>", options)
+vim.keymap.set("n", "<leader>tf", "<Cmd>lua require('telescope.builtin').find_files()<CR>", options)
+vim.keymap.set("n", "<leader>tl", "<Cmd>lua require('telescope.builtin').live_grep()<CR>", options)
+vim.keymap.set("n", "<leader>ts", "<Cmd>lua require('telescope.builtin').grep_string()<CR>", options)
+vim.keymap.set("n", "<leader>tcb", "<Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", options)
+vim.keymap.set("n", "<leader>tb", "<Cmd>lua require('telescope.builtin').buffers()<CR>", options)
 
 ---------------------------- Colorscheme ---------------------------------------------
 

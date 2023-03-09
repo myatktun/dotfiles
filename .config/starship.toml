@@ -80,8 +80,12 @@ disabled = true
 [terraform]
 disabled = true
 
+[cmake]
+disabled = true
+
 [dotnet]
 disabled = true
+
 
 [username]
 style_user = "bold dimmed blue"
