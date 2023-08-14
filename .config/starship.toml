@@ -55,9 +55,9 @@ disabled = true
 disabled = true
 
 [python]
-# format = " [$symbol$version]($style) "
-# style = "bold green"
-disabled = true
+format = "[$virtualenv]($style) "
+style = "bold green"
+disabled = false
 
 [nodejs]
 disabled = true

@@ -19,7 +19,7 @@ local on_attach = function(client, bufnr)
     buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     -- Mappings.
-    local opts = { noremap=true, silent=true }
+    local opts = { noremap = true, silent = true }
     local au_lsp = vim.api.nvim_create_augroup("eslint_lsp", { clear = true })
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -41,17 +41,6 @@ local on_attach = function(client, bufnr)
     -- buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
     buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
-
-    vim.api.nvim_create_autocmd("BufWritePre", {
-        pattern = "*",
-        callback = function()
-            if(vim.bo.filetype ~= "json") then
-                vim.lsp.buf.format()
-            end
-        end,
-        group = au_lsp,
-    })
-
     -- vim.api.nvim_create_autocmd("BufWritePost", {
     --     pattern = "*.json",
     --     command = [[silent !yarn prettier $(pwd)/% --write]]
@@ -61,6 +50,16 @@ local on_attach = function(client, bufnr)
         pattern = { '*.js', '*.jsx', '*.ts', '*.tsx' },
         command = [[EslintFixAll]],
     })
+
+    -- vim.api.nvim_create_autocmd("BufWritePre", {
+    --     pattern = "*",
+    --     callback = function()
+    --         if (vim.bo.filetype ~= "json") then
+    --             vim.lsp.buf.format()
+    --         end
+    --     end,
+    --     group = au_lsp,
+    -- })
 
     vim.api.nvim_create_autocmd("CursorHold", {
         buffer = bufnr,
@@ -75,7 +74,6 @@ local on_attach = function(client, bufnr)
             vim.diagnostic.open_float(nil, opt)
         end
     })
-
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -84,13 +82,14 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 local servers = { 'bashls', 'clangd', 'cmake', 'cssls',
-                    'dockerls', 'eslint', 'html', 'jsonls', 'lua_ls',
-                    'pyright', 'rust_analyzer', 'terraformls',
-                    'tsserver',  'yamlls' }
+    'dockerls', 'eslint', 'html', 'jdtls', 'jsonls', 'lua_ls',
+    'pyright', 'rust_analyzer', 'terraformls',
+    'tsserver', 'yamlls' }
 
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
-        root_dir = util.root_pattern(".git", "package.json", "tsconfig.json", "setup.py",  "setup.cfg", "pyproject.toml", "requirements.txt"),
+        root_dir = util.root_pattern(".git", "package.json", "tsconfig.json", "setup.py", "setup.cfg", "pyproject.toml",
+            "requirements.txt"),
         on_attach = on_attach,
         flags = {
             debounce_text_changes = 150,
@@ -100,8 +99,35 @@ for _, lsp in ipairs(servers) do
             yaml = {
                 schemas = {
                         ["https://raw.githubusercontent.com/instrumenta/kubernetes-json-schema/master/v1.9.9-standalone-strict/all.json"] = "/*.k8s.y*ml",
-                      },
+                },
             }
         }
     }
 end
+
+nvim_lsp.lua_ls.setup {
+    settings = {
+        Lua = {
+            runtime = {
+                -- Tell the language server which version of Lua you're using
+                -- (most likely LuaJIT in the case of Neovim)
+                version = 'LuaJIT',
+            },
+            diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = {
+                    'vim',
+                    'require'
+                },
+            },
+            workspace = {
+                -- Make the server aware of Neovim runtime files
+                library = vim.api.nvim_get_runtime_file("", true),
+            },
+            -- Do not send telemetry data containing a randomized but unique identifier
+            telemetry = {
+                enable = false,
+            },
+        },
+    },
+}

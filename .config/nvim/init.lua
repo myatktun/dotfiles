@@ -65,7 +65,7 @@ vim.api.nvim_create_autocmd({ 'BufEnter' }, {
 })
 
 vim.cmd([[autocmd CmdLineEnter : set ignorecase nosmartcase]])
-vim.cmd([[autocmd FileType javascript,css,c,cpp,json,cs nmap <silent> <leader>; <Plug>(cosco-commaOrSemiColon)]])
+vim.cmd([[autocmd FileType javascript,css,c,cpp,json,cs,java nmap <silent> <leader>; <Plug>(cosco-commaOrSemiColon)]])
 vim.cmd([[autocmd BufEnter * set fo-=o fo-=r fo-=c]])
 vim.cmd([[autocmd BufRead,BufNewFile Jenkinsfile setf groovy]])
 vim.cmd([[autocmd FileType kivy setlocal commentstring=#\ %s]])

@@ -121,7 +121,7 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # change audio output
-set $internal_audio pactl set-default-sink $(pactl list sinks | grep Name | awk -F: '{print $2}' | grep analog) && amixer set Master 26% && amixer -c 1 set "Auto-Mute Mode" Enabled && amixer -c 1 set PCM 100% && amixer -c 1 set Mic 75% && amixer -c 1 set Front unmute
+set $internal_audio pactl set-default-sink $(pactl list sinks | grep Name | awk -F: '{print $2}' | grep analog) && amixer set Master 60% && amixer -c 1 set "Auto-Mute Mode" Enabled && amixer -c 1 set PCM 100% && amixer -c 1 set Mic 75% && amixer -c 1 set Front unmute
 set $external_audio pactl set-default-sink $(pactl list sinks | grep Name | awk -F: '{print $2}' | grep hdmi)
 set $bluetooth_audio pactl set-default-sink $(pactl list sinks | grep Name | awk -F: '{print $2}' | grep bluez)
 bindsym $mod+$alt+1 exec --no-startup-id $internal_audio
