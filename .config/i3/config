@@ -7,12 +7,12 @@ exec_always --no-startup-id ~/.config/i3/display.sh
 exec_always --no-startup-id feh --bg-fill ~/Pictures/solid-color-282828.png
 
 # disable mouse acceleration
-exec_always --no-startup-id xinput --set-prop 25 'libinput Accel Profile Enabled' 0, 1
-exec_always --no-startup-id xinput --set-prop 16 'libinput Accel Profile Enabled' 0, 1
+exec_always --no-startup-id xinput set-prop $(xinput list --id-only pointer:"$(xinput list --name-only | grep -i -m 1 dongle$)") 'libinput Accel Profile Enabled' 0, 1
 
 # touchpad settings
-exec_always --no-startup-id xinput set-prop 21 'libinput Tapping Enabled' 1
-exec_always --no-startup-id xinput set-prop 21 'libinput Natural Scrolling Enabled' 1
+exec_always --no-startup-id xinput set-prop "$(xinput list --name-only | grep -i touchpad)" 'libinput Tapping Enabled' 1
+exec_always --no-startup-id xinput set-prop "$(xinput list --name-only | grep -i touchpad)" 'libinput Natural Scrolling Enabled' 0
+exec_always --no-startup-id xinput set-prop "$(xinput list --name-only | grep -i touchpad)" 'libinput Accel Profile Enabled' 0, 1
 
 # show keyboard layout on i3bar
 exec_always --no-startup-id setxkbmap $(cat ~/.config/i3status/KBlayout.log)
