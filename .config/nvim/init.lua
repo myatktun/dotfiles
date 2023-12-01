@@ -86,6 +86,11 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
     command = [[setlocal cc=80 shiftwidth=8 tabstop=8 softtabstop=8 cindent noet]],
 })
 
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+    pattern = { '*.py' },
+    command = [[setlocal cc=79]],
+})
+
 vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
     pattern = { '*' },
     command = [[%s/\s\+$//e]],

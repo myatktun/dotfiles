@@ -96,6 +96,9 @@ source <(minikube completion bash)
 source <(eksctl completion bash)
 complete -C '/usr/local/bin/aws_completer' aws
 
+# istio autocomplete
+source <(istioctl completion bash)
+
 # Helm config
 source <(helm completion bash)
 

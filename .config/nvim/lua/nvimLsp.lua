@@ -51,15 +51,15 @@ local on_attach = function(client, bufnr)
         command = [[EslintFixAll]],
     })
 
-    -- vim.api.nvim_create_autocmd("BufWritePre", {
-    --     pattern = "*",
-    --     callback = function()
-    --         if (vim.bo.filetype ~= "json") then
-    --             vim.lsp.buf.format()
-    --         end
-    --     end,
-    --     group = au_lsp,
-    -- })
+    vim.api.nvim_create_autocmd("BufWritePre", {
+        pattern = "*",
+        callback = function()
+            if (vim.bo.filetype ~= "json") then
+                vim.lsp.buf.format()
+            end
+        end,
+        group = au_lsp,
+    })
 
     vim.api.nvim_create_autocmd("CursorHold", {
         buffer = bufnr,
@@ -74,6 +74,10 @@ local on_attach = function(client, bufnr)
             vim.diagnostic.open_float(nil, opt)
         end
     })
+
+    if client.name == "pylsp" then
+        client.server_capabilities.renameProvider = false
+    end
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -83,7 +87,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 -- map buffer local keybindings when the language server attaches
 local servers = { 'bashls', 'clangd', 'cmake', 'cssls',
     'dockerls', 'eslint', 'html', 'jdtls', 'jsonls', 'lua_ls',
-    'pyright', 'rust_analyzer', 'terraformls',
+    'pylsp', 'pyright', 'rust_analyzer', 'terraformls',
     'tsserver', 'yamlls' }
 
 for _, lsp in ipairs(servers) do
@@ -99,7 +103,7 @@ for _, lsp in ipairs(servers) do
             yaml = {
                 schemas = {
                         ["https://raw.githubusercontent.com/instrumenta/kubernetes-json-schema/master/v1.9.9-standalone-strict/all.json"] = "/*.k8s.y*ml",
-                },
+                }
             }
         }
     }

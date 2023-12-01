@@ -95,7 +95,8 @@ gaps outer 7
 gaps top 0
 
 bar {
-  font pango:DejaVu Sans Mono, Font Awesome 6 Brands Regular, Font Awesome 6 Free Solid 11
+    font pango:DejaVu Sans Mono, Font Awesome 6 Brands Regular, Font Awesome 6 Free Solid 11
+    bindsym --release button2 exec --no-startup-id onboard
     position top
     separator_symbol " | "
     status_command i3status --config ~/.config/i3status/i3status.conf
@@ -149,6 +150,7 @@ bindsym $mod+d exec --no-startup-id rofi -show drun
 
 # open spotify
 bindsym $mod+Control+s workspace $workspace0; exec --no-startup-id spotify
+bindsym $mod+Control+t exec --no-startup-id spotify
 
 # change keyboard layout
 bindsym $mod+Control+space exec --no-startup-id setxkbmap us && setxkbmap -query | awk '/layout/{print $2}' > ~/.config/i3status/KBlayout.log && $refresh_i3status
