@@ -11,7 +11,7 @@ exec_always --no-startup-id xinput set-prop $(xinput list --id-only pointer:"$(x
 
 # touchpad settings
 exec_always --no-startup-id xinput set-prop "$(xinput list --name-only | grep -i touchpad)" 'libinput Tapping Enabled' 1
-exec_always --no-startup-id xinput set-prop "$(xinput list --name-only | grep -i touchpad)" 'libinput Natural Scrolling Enabled' 0
+exec_always --no-startup-id xinput set-prop "$(xinput list --name-only | grep -i touchpad)" 'libinput Natural Scrolling Enabled' 1
 exec_always --no-startup-id xinput set-prop "$(xinput list --name-only | grep -i touchpad)" 'libinput Accel Profile Enabled' 0, 1
 
 # show keyboard layout on i3bar

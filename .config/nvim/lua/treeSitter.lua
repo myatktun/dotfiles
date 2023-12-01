@@ -1,6 +1,7 @@
 local ts = require "nvim-treesitter.configs"
+require("ts_context_commentstring").setup{}
+vim.g.skip_ts_context_commentstring_module = true
 ts.setup {
-    context_commentstring = { enable = true },
     ensure_installed = { "bash", "c", "cpp", "css", "html", "java", "javascript", "json", "lua", "python", "scss", "tsx",
         "typescript", "vim", "yaml" },
     autopairs = {
