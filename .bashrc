@@ -31,9 +31,13 @@ if [[ ! $TERM =~ screen ]] && [[ ! $TERM =~ tmux ]] && [ -z "$TMUX" ]; then
   tmux attach || tmux new
 fi
 
+# tmux-sessionizer
+bind '"\C-f"':'"tmux-sessionizer\n"'
+
 # auto start starship
 eval "$(starship init bash)"
 
+# set editor
 export EDITOR="$(which nvim)"
 
 # git setup for config files
@@ -102,12 +106,17 @@ source <(istioctl completion bash)
 # Helm config
 source <(helm completion bash)
 
-# fzf key-bindings
+# fzf default commands
+export FZF_DEFAULT_COMMAND="fd --hidden --exclude .git"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
+# fzf key bindings
 if [ -x "$(command -v fzf)"  ]
 then
   source /usr/share/fzf/shell/key-bindings.bash
 fi
 
+# mkdir + cd
 function mkcd
 {
   command mkdir $1 && cd $1
