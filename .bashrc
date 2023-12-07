@@ -31,9 +31,6 @@ if [[ ! $TERM =~ screen ]] && [[ ! $TERM =~ tmux ]] && [ -z "$TMUX" ]; then
   tmux attach || tmux new
 fi
 
-# tmux-sessionizer
-bind '"\C-f"':'"tmux-sessionizer\n"'
-
 # auto start starship
 eval "$(starship init bash)"
 
