@@ -45,6 +45,10 @@ alias get_maintainer="$HOME/Linux/linux_mainline/scripts/get_maintainer.pl"
 
 alias update-grub="grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg"
 
+
+# LD_PRELOAD
+export LD_PRELOAD=/usr/lib64/libstdc++.so.6
+
 # yarn path
 export PATH="$PATH:$HOME/.yarn/bin"
 
@@ -72,6 +76,12 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+if [[ -z "${PYENV_VIRTUAL_ENV}" ]]; then
+    export JUPYTER_CONFIG_DIR=$PWD/.jupyter
+else
+    unset JUPYTER_CONFIG_DIR
+fi
+
 
 # cargo path (rust pkp manager)
 export PATH=$PATH:$HOME/.cargo/env
@@ -124,6 +134,16 @@ function mkcd
 # PROMPT_COMMAND='__git_ps1 "\[\e[1;31m\]\u\[\e[m\]\[\e[1;34m\]@\[\e[m\]\[\e[1;32m\]\h:\[\e[m\]\[\e[1;36m\]\W\[\e[m\]" "\[\e[1;34m\]\$\[\e[m\] "'
 # export PS1='\[\033[32m\]\u \[\033[36m\]@ \h \w\[\033[32m\]$(__git_ps1)\n└─ \$ ▶\[\033[0m\] '
 
+export KERNEL_DEV_DIR="$HOME/Projects/kdev"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
 if [ -d ~/.bashrc.d ]; then
   for rc in ~/.bashrc.d/*; do
     if [ -f "$rc" ]; then
@@ -134,10 +154,29 @@ fi
 
 unset rc
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/myatktun/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/myatktun/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/myatktun/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/myatktun/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/myatktun/google-cloud-sdk/path.bash.inc' ]; then . '/home/myatktun/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/myatktun/google-cloud-sdk/completion.bash.inc' ]; then . '/home/myatktun/google-cloud-sdk/completion.bash.inc'; fi
+. "$HOME/.cargo/env"
+
+# >>>> Vagrant command completion (start)
+. /opt/vagrant/embedded/gems/gems/vagrant-2.4.1/contrib/bash/completion.sh
+# <<<<  Vagrant command completion (end)
