@@ -1,4 +1,4 @@
-command_timeout = 1000
+command_timeout = 10000
 
 [character]
 error_symbol = "[✖](bold red) "
@@ -86,6 +86,8 @@ disabled = true
 [dotnet]
 disabled = true
 
+[c]
+disabled = true
 
 [username]
 style_user = "bold dimmed blue"

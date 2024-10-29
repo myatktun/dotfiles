@@ -21,6 +21,7 @@ return require('packer').startup(function()
   use 'christoomey/vim-titlecase'
   use 'davidgranstrom/nvim-markdown-preview'
   use {'dsznajder/vscode-es7-javascript-react-snippets',run = 'yarn install --frozen-lockfile && yarn compile'}
+  use { "GCBallesteros/jupytext.nvim", config = true }
   use 'ggandor/lightspeed.nvim'
   use {'hrsh7th/nvim-cmp', requires = {'saadparwaiz1/cmp_luasnip','hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'L3MON4D3/LuaSnip'}}
   use 'JoosepAlviste/nvim-ts-context-commentstring'
@@ -31,7 +32,6 @@ return require('packer').startup(function()
   use 'lfilho/cosco.vim'
   use 'lukas-reineke/indent-blankline.nvim'
   use 'mattn/emmet-vim'
-  use 'mfussenegger/nvim-dap'
   use { "microsoft/vscode-js-debug", opt = true, run = "npm install --legacy-peer-deps && npm run compile" }
   use 'morhetz/gruvbox'
   use 'mxsdev/nvim-dap-vscode-js'
@@ -43,7 +43,7 @@ return require('packer').startup(function()
   use {'nvim-treesitter/nvim-treesitter',run = ':TSUpdate'}
   use 'nvim-lualine/lualine.nvim'
   use 'rafamadriz/friendly-snippets'
-  use 'rcarriga/nvim-dap-ui'
+  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} }
   use 'simrat39/symbols-outline.nvim'
   use 'theHamsta/nvim-dap-virtual-text'
   use 'toppair/reach.nvim'

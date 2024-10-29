@@ -77,8 +77,8 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
 })
 
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-    pattern = { '*.md', '*.txt' },
-    command = [[setlocal cc=95 spell spelllang=en_us]],
+    pattern = { '*.md', '*.txt', '*.rst' },
+    command = [[setlocal cc=95 spell spelllang=en_us,en_gb]],
 })
 
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
@@ -146,6 +146,9 @@ vim.keymap.set("n", "<leader>bd", ":%bd|e#|bd#<CR>", options)
 ---- Remove highlights after search
 vim.keymap.set("n", "<leader>/", ":noh<CR>", options)
 
+---- Delete into blackhole register
+vim.keymap.set("n", "<leader>dd", "\"_dd", options)
+
 ---- Yank all & copy all
 vim.keymap.set("n", "<leader>ya", "ggVGy", options)
 vim.keymap.set("n", "<leader>aa", "ggVG\"+y", options)
@@ -204,3 +207,4 @@ require("toggleterm").setup()
 require("autopairs")
 require("nvimDap")
 require("symbols-outline").setup()
+require("jupyText")

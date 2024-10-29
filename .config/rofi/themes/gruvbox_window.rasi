@@ -15,7 +15,7 @@ configuration {
     scroll-method:      0;
     click-to-exit:      true;
     sidebar-mode:       true;
-    modi:        "window,run,drun,calc,:music,😀:/usr/bin/rofimoji";
+    modi:        "window,run,drun,calc,😀:/usr/bin/rofimoji";
     display-window:     "";
     display-windowcd:   "";
     display-run:        "";

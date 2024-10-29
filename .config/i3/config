@@ -1,7 +1,7 @@
 ############################################### default commands & settings ###############################################
 
 # load monitor settings
-exec_always --no-startup-id ~/.config/i3/display.sh
+# exec_always --no-startup-id ~/.config/i3/display.sh
 
 # load wallpaper
 exec_always --no-startup-id feh --bg-fill ~/Pictures/solid-color-282828.png
@@ -13,6 +13,11 @@ exec_always --no-startup-id xinput set-prop $(xinput list --id-only pointer:"$(x
 exec_always --no-startup-id xinput set-prop "$(xinput list --name-only | grep -i touchpad)" 'libinput Tapping Enabled' 1
 exec_always --no-startup-id xinput set-prop "$(xinput list --name-only | grep -i touchpad)" 'libinput Natural Scrolling Enabled' 1
 exec_always --no-startup-id xinput set-prop "$(xinput list --name-only | grep -i touchpad)" 'libinput Accel Profile Enabled' 0, 1
+
+# disable screenoff after inactivity
+exec_always --no-startup-id xset -dpms
+exec_always --no-startup-id xset s off
+exec_always --no-startup-id xset s blank
 
 # show keyboard layout on i3bar
 exec_always --no-startup-id setxkbmap $(cat ~/.config/i3status/KBlayout.log)
@@ -122,7 +127,7 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # change audio output
-set $internal_audio pactl set-default-sink $(pactl list sinks | grep Name | awk -F: '{print $2}' | grep analog) && amixer set Master 60% && amixer -c 1 set "Auto-Mute Mode" Enabled && amixer -c 1 set PCM 100% && amixer -c 1 set Mic 75% && amixer -c 1 set Front unmute
+set $internal_audio pactl set-default-sink $(pactl list sinks | grep Name | awk -F: '{print $2}' | grep analog) && amixer set Master 100% && amixer -c 1 set "Auto-Mute Mode" Enabled && amixer -c 1 set PCM 100% && amixer -c 1 set Mic 75% && amixer -c 1 set Front unmute
 set $external_audio pactl set-default-sink $(pactl list sinks | grep Name | awk -F: '{print $2}' | grep hdmi)
 set $bluetooth_audio pactl set-default-sink $(pactl list sinks | grep Name | awk -F: '{print $2}' | grep bluez)
 bindsym $mod+$alt+1 exec --no-startup-id $internal_audio
@@ -242,8 +247,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # i3lock & suspend
-bindsym $mod+Shift+s exec --no-startup-id i3lock --color 282828 && systemctl suspend
-bindsym $mod+Shift+i exec --no-startup-id i3lock --color 282828
+bindsym $mod+Shift+s exec --no-startup-id i3lock --color 282828 & sleep 5 && xset dpms force suspend
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+Control+e exec i3-msg exit
