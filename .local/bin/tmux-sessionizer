@@ -20,7 +20,7 @@ fi
 
 if ! tmux has-session -t=$selected_name 2> /dev/null; then
     tmux new-session -ds $selected_name -c $selected
-    tmux split-window -t $selected_name -c $selected -v -p 20
+    tmux split-window -t $selected_name -c $selected -v -l 10
     tmux select-window -t $selected_name:1
     tmux send-keys -t $selected_name:1.1 nvim\ . Enter
     tmux select-pane -t $selected_name:1.1

@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+doc_type=$(echo -e "books\nkernel docs" | fzf)
+
+if [ "$doc_type" == "books" ]; then
+    selected=$(fd '.*.pdf' "$HOME/Documents/Books" | fzf)
+else
+    selected=$(fd '.html' "$KERNEL_DEV_DIR/linux/Documentation/output" | fzf)
+fi
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+reader=$(echo -e "google-chrome\nzathura" | fzf)
+
+if [[ -z $reader ]]; then
+    echo "error: Must select a reader"
+    exit 1
+fi
+
+$reader "$selected" &> /dev/null &
