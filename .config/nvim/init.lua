@@ -28,8 +28,9 @@ vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 vim.o.wrap = false
 vim.g.user_emmet_leader_key = "<C-Q>"
 vim.g.vimwiki_list = { {} }
-vim.g.vimwiki_list = { { path = "~/Documents/Vimwiki", syntax = "markdown", ext = "md" } }
+vim.g.vimwiki_list = { { path = "~/Documents/Vimwiki", syntax="markdown", ext = "md" } }
 vim.g.nvim_markdown_preview_theme = "solarized-dark"
+vim.g.skip_ts_context_commentstring_module = true,
 vim.cmd([[command! MakeTags !ctags -R .]])
 vim.cmd([[command! Make make %< ]])
 vim.cmd([[command! Node !node % ]])
@@ -111,9 +112,6 @@ vim.keymap.set("i", "jj", "<Esc>", options)
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", options)
 vim.keymap.set("t", "jj", "<C-\\><C-n>", options)
 
----- ToggleTerm
-vim.keymap.set("n", "<leader>tt", ":ToggleTerm size=10<CR>", options)
-
 ---- Toggle SymbolsOutline
 vim.keymap.set("n", "<F8>", ":SymbolsOutline<CR>", options)
 
@@ -153,6 +151,10 @@ vim.keymap.set("n", "<leader>dd", "\"_dd", options)
 vim.keymap.set("n", "<leader>ya", "ggVGy", options)
 vim.keymap.set("n", "<leader>aa", "ggVG\"+y", options)
 
+---- Leap.nvim
+vim.keymap.set({'n', 'x', 'o'}, 's', '<Plug>(leap)')
+vim.keymap.set('n',             'S', '<Plug>(leap-from-window)')
+
 ---- Load scheme
 vim.keymap.set("n", ";html", ":-1read $HOME/.config/nvim/.skeleton.html<CR>7jwf>a", options)
 vim.keymap.set("n", ";ct", ":-1read $HOME/.config/nvim/.skeleton.c<CR>4jo", options)
@@ -181,30 +183,17 @@ vim.keymap.set("n", "<leader>tl", "<Cmd>lua require('telescope.builtin').live_gr
 vim.keymap.set("n", "<leader>ts", "<Cmd>lua require('telescope.builtin').grep_string()<CR>", options)
 vim.keymap.set("n", "<leader>tcb", "<Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", options)
 vim.keymap.set("n", "<leader>tb", "<Cmd>lua require('telescope.builtin').buffers()<CR>", options)
-
----------------------------- Colorscheme ---------------------------------------------
-
-vim.cmd([[colorscheme gruvbox]])
+vim.keymap.set("n", "<leader>tr", "<Cmd>lua require('telescope.builtin').lsp_references()<CR>", options)
+vim.keymap.set("n", "<leader>td", "<Cmd>lua require('telescope.builtin').lsp_definitions()<CR>", options)
+vim.keymap.set("n", "<leader>ttd", "<Cmd>lua require('telescope.builtin').lsp_type_definitions()<CR>", options)
 
 ---------------------------- Plugins -------------------------------------------------
 
-require("plugins")
-require("nvCmp")
-require("nvimLsp")
-require("nvimTree")
-require("bufferLine")
-require("luaLine")
-require("gitsigns").setup()
-require("colorizer").setup()
-require("telescope").setup({ defaults = { sorting_strategy = "ascending" } })
-require("telescope").load_extension("fzf")
-require("telescope").load_extension("dap")
-require("neoscroll").setup()
-require("luasnip.loaders.from_vscode").load()
-require("treeSitter")
-require("lightSpeed")
-require("toggleterm").setup()
-require("autopairs")
-require("nvimDap")
-require("symbols-outline").setup()
-require("jupyText")
+require("config.lazy")
+require("lazy").setup("plugins")
+-- vim.lsp.config("luasnip.loaders.from_vscode").load()
+
+---------------------------- Colorscheme ---------------------------------------------
+
+vim.o.background = "dark"
+vim.cmd([[colorscheme gruvbox]])

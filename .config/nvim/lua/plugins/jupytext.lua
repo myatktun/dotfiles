@@ -1,5 +1,7 @@
-require("jupytext").setup(
-    {
+return {
+    "GCBallesteros/jupytext.nvim",
+    config = true,
+    opts = {
         custom_language_formatting = {
           python = {
             extension = "md",
@@ -8,4 +10,4 @@ require("jupytext").setup(
           }
         }
     }
-)
+}
